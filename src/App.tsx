@@ -1,3 +1,13 @@
+import WindBackground from "./components/WindBackground";
+import Hero from "./components/Hero";
+
 export default function App() {
-  return <main>genesite</main>;
+  return (
+    <>
+      <WindBackground />
+      <main className="page">
+        <Hero />
+      </main>
+    </>
+  );
 }

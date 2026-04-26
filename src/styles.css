@@ -120,3 +120,31 @@ a:focus-visible, button:focus-visible {
 .wind-bg.fallback {
   background: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 50%, #FFFFFF 100%);
 }
+
+.hero {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 2.4em;
+}
+
+.hero-photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  display: block;
+}
+
+.hero h1 { margin-bottom: 16px; }
+
+@media (max-width: 640px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: left;
+  }
+  .hero-photo { width: 160px; height: 160px; }
+}
