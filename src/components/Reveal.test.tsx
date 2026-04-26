@@ -1,26 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import Reveal from "./Reveal";
+import { useReducedMotion } from "framer-motion";
 
-function setReducedMotion(reduced: boolean) {
-  Object.defineProperty(window, "matchMedia", {
-    writable: true,
-    value: vi.fn().mockImplementation((query: string) => ({
-      matches: query.includes("reduce") && reduced,
-      media: query,
-      onchange: null,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    })),
-  });
-}
+vi.mock("framer-motion", async () => {
+  const actual = await vi.importActual<typeof import("framer-motion")>("framer-motion");
+  return { ...actual, useReducedMotion: vi.fn() };
+});
+
+const mockReduced = vi.mocked(useReducedMotion);
 
 describe("Reveal", () => {
   beforeEach(() => {
-    setReducedMotion(false);
+    mockReduced.mockReturnValue(false);
   });
 
   it("renders children", () => {
@@ -29,10 +21,9 @@ describe("Reveal", () => {
   });
 
   it("renders children unwrapped when reduced motion is requested", () => {
-    setReducedMotion(true);
+    mockReduced.mockReturnValue(true);
     const { container } = render(<Reveal><p data-testid="kid">hi</p></Reveal>);
     expect(screen.getByTestId("kid")).toBeInTheDocument();
-    // No motion wrapper element when reduced
     expect(container.querySelector("[style*='opacity']")).toBeNull();
   });
 });
