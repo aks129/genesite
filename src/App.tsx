@@ -5,6 +5,8 @@ import Projects from "./components/Projects";
 import Passions from "./components/Passions";
 import Travels from "./components/Travels";
 import Contact from "./components/Contact";
+import Socials from "./components/Socials";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
         <Passions />
         <Travels />
         <Contact />
+        <Socials />
+        <Footer />
       </main>
     </>
   );

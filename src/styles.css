@@ -227,3 +227,22 @@ a:focus-visible, button:focus-visible {
   color: var(--mute);
   font-size: 17px;
 }
+
+.socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  line-height: 2;
+}
+.socials li { padding: 2px 0; }
+
+.colophon {
+  margin-top: 6em;
+  padding-top: 2em;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--faint);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
