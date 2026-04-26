@@ -7,7 +7,7 @@ export default function About() {
         <h2 id="about-h">About Me</h2>
         <p>
           Right now I am Senior Lead for Payer Interoperability, Analytics, and AI at{" "}
-          <a href="https://www.outcomes.com" target="_blank" rel="noopener">Outcomes</a>,
+          <a href="https://www.outcomes.com" target="_blank" rel="noopener noreferrer">Outcomes</a>,
           the pharmacy technology company behind 50,000+ U.S. independent pharmacies and
           the country's leading CMR/MTM vendor. I built that pillar's interoperability
           strategy from scratch and serve as the AI champion for the product organization
@@ -15,7 +15,7 @@ export default function About() {
           days rather than months.
         </p>
         <p>
-          In parallel I run <a href="https://fhiriq.com" target="_blank" rel="noopener">FHIR IQ</a>,
+          In parallel I run <a href="https://fhiriq.com" target="_blank" rel="noopener noreferrer">FHIR IQ</a>,
           an independent practice and open-source studio. There I host the{" "}
           <em>Out of the FHIR</em> podcast, write the <em>FHIR IQ Playbook</em> Substack,
           and ship small open-source tools — including <em>HealthClaw</em>, a HIPAA-aware

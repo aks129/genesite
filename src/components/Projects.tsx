@@ -11,7 +11,7 @@ export default function Projects() {
             <p>
               <span className="name">
                 {p.href ? (
-                  <a href={p.href} target="_blank" rel="noopener">{p.name}</a>
+                  <a href={p.href} target="_blank" rel="noopener noreferrer">{p.name}</a>
                 ) : (
                   p.name
                 )}

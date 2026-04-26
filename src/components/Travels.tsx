@@ -40,7 +40,7 @@ export default function Travels() {
           ))}
         </motion.div>
         <p className="album-link">
-          <a href={ALBUM_URL} target="_blank" rel="noopener">
+          <a href={ALBUM_URL} target="_blank" rel="noopener noreferrer">
             See the full album on Google Photos →
           </a>
         </p>

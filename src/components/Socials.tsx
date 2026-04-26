@@ -9,7 +9,7 @@ export default function Socials() {
         <ul className="socials">
           {socials.map(s => (
             <li key={s.href}>
-              <a href={s.href} target="_blank" rel="noopener">{s.label}</a>
+              <a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
             </li>
           ))}
         </ul>
