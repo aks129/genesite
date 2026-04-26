@@ -148,3 +148,20 @@ a:focus-visible, button:focus-visible {
   }
   .hero-photo { width: 160px; height: 160px; }
 }
+
+.project {
+  margin-bottom: 1.6em;
+}
+.project .name {
+  font-weight: 600;
+  font-style: italic;
+}
+.project .name a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--underline);
+  padding-bottom: 1px;
+  transition: border-color 0.15s ease;
+}
+.project .name a:hover {
+  border-bottom-color: var(--ink);
+}
