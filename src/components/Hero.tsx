@@ -21,7 +21,7 @@ export default function Hero() {
         </div>
         <h1 id="hero-name">Eugene Vestel</h1>
         <p className="lede">
-          I work on healthcare data — mostly the parts where standards, AI, and human
+          I work on healthcare data. Mostly the parts where standards, AI, and human
           judgment have to meet.
         </p>
       </div>

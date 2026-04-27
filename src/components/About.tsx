@@ -6,19 +6,20 @@ export default function About() {
       <section aria-labelledby="about-h">
         <h2 id="about-h">About Me</h2>
         <p>
-          Right now I am Senior Lead for Payer Interoperability, Analytics, and AI at{" "}
+          Right now I lead the interoperability, AI, and analytics product for a $50M
+          payer pillar at{" "}
           <a href="https://www.outcomes.com" target="_blank" rel="noopener noreferrer">Outcomes</a>,
           the pharmacy technology company behind 50,000+ U.S. independent pharmacies and
           the country's leading CMR/MTM vendor. I built that pillar's interoperability
-          strategy from scratch and serve as the AI champion for the product organization
-          — helping teams move from PowerPoint mocks to working agentic prototypes in
-          days rather than months.
+          strategy from zero and serve as the AI champion for the product organization,
+          helping teams move from PowerPoint mocks to working agentic prototypes in days
+          rather than months.
         </p>
         <p>
           In parallel I run <a href="https://fhiriq.com" target="_blank" rel="noopener noreferrer">FHIR IQ</a>,
           an independent practice and open-source studio. There I host the{" "}
           <em>Out of the FHIR</em> podcast, write the <em>FHIR IQ Playbook</em> Substack,
-          and ship small open-source tools — including <em>HealthClaw</em>, a HIPAA-aware
+          and ship small open-source tools, including <em>HealthClaw</em>, a HIPAA-aware
           security layer for AI agents working on clinical data, and{" "}
           <em>Smart Health Connect</em>, a SMART-on-FHIR personal health record.
         </p>

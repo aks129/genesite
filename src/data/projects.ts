@@ -9,7 +9,7 @@ export const projects: Project[] = [
     name: "HealthClaw",
     href: "https://healthclaw.io",
     description:
-      "A security layer between AI agents and clinical data. Redacts PHI on every read; enforces multi-step human approval for clinical writes — proposal, permission evaluation, HMAC confirmation, immutable audit log. Twelve MCP tools. FHIR R4/R6, US Core v9.",
+      "A security layer between AI agents and clinical data. Redacts PHI on every read. Enforces multi-step human approval for clinical writes (proposal, permission evaluation, HMAC confirmation, immutable audit log). Twelve MCP tools. FHIR R4/R6, US Core v9.",
   },
   {
     name: "Smart Health Connect",
@@ -38,6 +38,6 @@ export const projects: Project[] = [
     name: "FHIR IQ Playbook",
     href: "https://evestel.substack.com/",
     description:
-      "A weekly newsletter on FHIR implementation, healthcare AI, and quality measurement. Written for the people doing the actual work. 550+ readers.",
+      "A weekly newsletter on FHIR implementation, healthcare AI, and quality measurement. Written for the people doing the actual work. Now read by 550+ healthcare data professionals.",
   },
 ];
