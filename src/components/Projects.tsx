@@ -6,6 +6,9 @@ export default function Projects() {
     <Reveal>
       <section aria-labelledby="projects-h">
         <h2 id="projects-h">Projects</h2>
+        <p>
+          A handful of public projects, twenty-six repositories, one bet:
+        </p>
         {projects.map(p => (
           <div className="project" key={p.name}>
             <p>

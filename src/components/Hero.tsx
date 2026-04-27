@@ -21,9 +21,8 @@ export default function Hero() {
         </div>
         <h1 id="hero-name">Eugene Vestel</h1>
         <p className="lede">
-          Two decades building the data systems healthcare runs on. The work that
-          matters now lives at the seams — where standards, AI, and human judgment
-          have to meet.
+          I'm building HIPAA-aware AI agents for clinical data, and writing about
+          what's coming next.
         </p>
       </div>
     </section>
