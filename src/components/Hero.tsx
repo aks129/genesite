@@ -24,6 +24,12 @@ export default function Hero() {
           I'm building HIPAA-aware AI agents for clinical data, and writing about
           what's coming next.
         </p>
+        <p className="hero-callout">
+          <span className="tag">Upcoming</span>
+          Speaking at{" "}
+          <a href="https://devdays.com" target="_blank" rel="noopener noreferrer">FHIR DevDays</a>
+          {" "}<span className="sep">·</span> June 2026
+        </p>
       </div>
     </section>
   );

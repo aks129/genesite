@@ -140,6 +140,29 @@ a:focus-visible, button:focus-visible {
 
 .hero h1 { margin-bottom: 16px; }
 
+.hero-callout {
+  font-size: 14px;
+  color: var(--mute);
+  font-style: italic;
+  margin: 0.6em 0 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hero-callout .tag {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.hero-callout .sep { opacity: 0.5; margin: 0 4px; }
+
 @media (max-width: 640px) {
   .hero {
     grid-template-columns: 1fr;

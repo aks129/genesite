@@ -18,18 +18,10 @@ export default function About() {
           layer that policy and audit will eventually require.
         </p>
         <p>
-          Day to day, I am Senior Product Manager at{" "}
-          <a href="https://www.outcomes.com" target="_blank" rel="noopener noreferrer">Outcomes</a>,
-          where I lead interoperability, AI, and analytics for a $50M payer
-          pillar. Outcomes is the pharmacy technology platform behind 50,000+
-          U.S. independent pharmacies and the country's leading CMR/MTM vendor.
-          I built that pillar's interoperability strategy from zero and serve
-          as the AI champion for the product organization.
-        </p>
-        <p>
           I write <em>FHIR IQ Playbook</em> on Substack and host{" "}
           <em>Out of the FHIR</em>, a podcast on healthcare data, AI, and the
-          standards underneath them.
+          standards underneath them. In June 2026 I am speaking at{" "}
+          <a href="https://devdays.com" target="_blank" rel="noopener noreferrer">FHIR DevDays</a>.
         </p>
         <p>
           Before this, I spent fifteen years inside large U.S. payer, provider,
