@@ -11,8 +11,8 @@ export default function Contact() {
           rather just talk.
         </p>
         <div className="contact-actions">
-          <a className="contact-mail" href="mailto:eugene.vestel@gmail.com">
-            eugene.vestel@gmail.com
+          <a className="contact-mail" href="mailto:gene@fhiriq.com">
+            gene@fhiriq.com
           </a>
           <a
             className="contact-book"
