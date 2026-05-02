@@ -7,6 +7,7 @@ import Travels from "./components/Travels";
 import Contact from "./components/Contact";
 import Socials from "./components/Socials";
 import Footer from "./components/Footer";
+import LegoGene from "./components/LegoGene";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Socials />
         <Footer />
       </main>
+      <LegoGene />
     </>
   );
 }
