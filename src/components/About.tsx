@@ -35,6 +35,10 @@ export default function About() {
           Allegheny Health Network, Express Scripts, Medco, and Duane Reade.
         </p>
         <p>
+          By day, a Senior Product Manager leading interoperability, AI, and
+          analytics for a payer-side product team in pharmacy technology.
+        </p>
+        <p>
           I hold an MBA in Healthcare from the University of Pittsburgh's Katz
           School of Business and live in Pittsburgh.
         </p>
