@@ -1,0 +1,9 @@
+public/main.HEIC
+public/travels/work travels/
+*.HEIC
+*.MOV
+node_modules
+dist
+.vite
+coverage
+*.tsbuildinfo

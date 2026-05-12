@@ -8,3 +8,10 @@ coverage
 vite.config.js
 vite.config.d.ts
 .vercel
+
+# Original asset sources — converted derivatives live in public/headshot.jpg
+# and public/travels/NN.jpg. Never commit the raw HEIC/MOV originals.
+public/main.HEIC
+public/travels/work travels/
+*.HEIC
+*.MOV

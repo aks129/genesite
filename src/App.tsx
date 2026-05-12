@@ -1,29 +1,41 @@
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import WindBackground from "./components/WindBackground";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Passions from "./components/Passions";
-import Travels from "./components/Travels";
-import Contact from "./components/Contact";
-import Socials from "./components/Socials";
-import Footer from "./components/Footer";
 import LegoGene from "./components/LegoGene";
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
+import ProjectsPage from "./pages/ProjectsPage";
+import CareerPage from "./pages/CareerPage";
+import HobbiesPage from "./pages/HobbiesPage";
+import WritingPage from "./pages/WritingPage";
+import SpeakingPage from "./pages/SpeakingPage";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   return (
-    <>
+    <BrowserRouter>
       <WindBackground />
+      <Nav />
+      <ScrollToTop />
       <main className="page">
-        <Hero />
-        <About />
-        <Projects />
-        <Passions />
-        <Travels />
-        <Contact />
-        <Socials />
-        <Footer />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/career" element={<CareerPage />} />
+          <Route path="/hobbies" element={<HobbiesPage />} />
+          <Route path="/writing" element={<WritingPage />} />
+          <Route path="/speaking" element={<SpeakingPage />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
       </main>
       <LegoGene />
-    </>
+    </BrowserRouter>
   );
 }
