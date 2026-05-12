@@ -2,6 +2,8 @@ import { useState } from "react";
 import Reveal from "../components/Reveal";
 import USMap from "../components/USMap";
 import { career, type City } from "../data/career";
+import { expertise, tenureYears, tenureContext } from "../data/expertise";
+import { events } from "../data/events";
 
 export default function CareerPage() {
   const [activeCity, setActiveCity] = useState<City | null>(null);
@@ -48,6 +50,66 @@ export default function CareerPage() {
               </li>
             ))}
           </ol>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section aria-labelledby="expertise-h" className="expertise-section">
+          <h2 id="expertise-h">Subject-matter expertise</h2>
+          <div className="tenure-banner" aria-label={`Over ${tenureYears} years in healthcare data`}>
+            <span className="tenure-num">{tenureYears}+</span>
+            <span className="tenure-label">
+              <span className="tenure-years">years</span>
+              <span className="tenure-context">{tenureContext}</span>
+            </span>
+          </div>
+
+          <div className="expertise-grid">
+            {expertise.map(group => (
+              <div className="expertise-group" key={group.heading}>
+                <h3>{group.heading}</h3>
+                <ul>
+                  {group.items.map(item => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section aria-labelledby="events-h">
+          <h2 id="events-h">Connectathons &amp; hackathons</h2>
+          <p>
+            Standards live or die on whether anyone actually shows up to plug
+            implementations into each other. The rooms below are where I show up.
+          </p>
+          <ul className="event-list">
+            {events.map((e, i) => (
+              <li key={`${e.title}-${i}`} className="event-item">
+                <div className="event-when">
+                  <span className="event-date">{e.when}</span>
+                  <span className="event-org">{e.org}</span>
+                </div>
+                <div className="event-body">
+                  <h3>
+                    {e.href ? (
+                      <a href={e.href} target="_blank" rel="noopener noreferrer">{e.title} ↗</a>
+                    ) : e.title}
+                    {e.location && <span className="event-location"> · {e.location}</span>}
+                  </h3>
+                  {e.tracks && e.tracks.length > 0 && (
+                    <ul className="event-tracks">
+                      {e.tracks.map(t => <li key={t}>{t}</li>)}
+                    </ul>
+                  )}
+                  <p>{e.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
       </Reveal>
 

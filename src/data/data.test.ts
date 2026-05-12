@@ -6,6 +6,8 @@ import { socials } from "./socials";
 import { writings } from "./writings";
 import { talks } from "./speaking";
 import { career, cityCoords } from "./career";
+import { expertise, tenureYears } from "./expertise";
+import { events } from "./events";
 
 describe("data integrity", () => {
   it("projects have a name and description", () => {
@@ -54,6 +56,27 @@ describe("data integrity", () => {
       expect(r.role).toBeTruthy();
       expect(r.org).toBeTruthy();
       expect(cityCoords[r.city]).toBeDefined();
+    }
+  });
+
+  it("expertise groups have a heading and at least 3 items", () => {
+    expect(expertise.length).toBeGreaterThanOrEqual(3);
+    expect(tenureYears).toBeGreaterThanOrEqual(10);
+    for (const g of expertise) {
+      expect(g.heading).toBeTruthy();
+      expect(g.items.length).toBeGreaterThanOrEqual(3);
+      for (const i of g.items) expect(i).toBeTruthy();
+    }
+  });
+
+  it("events have when, org, title, description", () => {
+    expect(events.length).toBeGreaterThan(0);
+    for (const e of events) {
+      expect(e.when).toBeTruthy();
+      expect(e.org).toBeTruthy();
+      expect(e.title).toBeTruthy();
+      expect(e.description).toBeTruthy();
+      if (e.href) expect(e.href).toMatch(/^https?:\/\//);
     }
   });
 
