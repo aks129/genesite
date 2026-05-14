@@ -202,9 +202,9 @@ a:focus-visible, button:focus-visible {
 .hero-photo {
   display: block;
   width: 100%;
-  max-width: 800px;
+  max-width: 480px;
   height: auto;
-  margin: 0 -80px;
+  margin: 0 auto;
   background: #EFEFEF;
   border-radius: 4px;
   box-shadow:
@@ -215,8 +215,8 @@ a:focus-visible, button:focus-visible {
 .hero-text { width: 100%; }
 .hero h1 { margin-bottom: 16px; }
 
-@media (max-width: 800px) {
-  .hero-photo { margin: 0; max-width: 100%; }
+@media (max-width: 540px) {
+  .hero-photo { max-width: 100%; }
 }
 
 .hero-callout {
@@ -852,4 +852,128 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 640px) {
   .event-item { grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ---- Career · interactive Gantt chart ---- */
+.career-chart-wrap {
+  margin: 1.4em -120px 2em;
+  padding: 24px 28px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #FDFCF9;
+}
+.career-chart-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.career-chart-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0;
+  letter-spacing: -0.005em;
+}
+.career-chart-hint {
+  font-size: 13px;
+  color: var(--mute);
+  font-style: italic;
+  margin: 0;
+}
+.career-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 8px 0 12px;
+}
+.career-bar-group rect { transition: fill 180ms ease; }
+.career-bar-group:hover rect { fill: var(--ink); }
+.career-bar-group:focus-visible rect {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.career-chart-legend {
+  display: flex;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--mute);
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+.career-chart-legend .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid var(--ink);
+}
+.career-chart-legend .dot-nyc { background: var(--ink); }
+.career-chart-legend .dot-nj  { background: var(--mute); }
+.career-chart-legend .dot-pgh { background: #FFFFFF; }
+
+.career-chart-panel {
+  margin-top: 14px;
+  padding: 16px 18px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+}
+.chart-panel-empty {
+  margin: 0;
+  font-style: italic;
+  color: var(--mute);
+  font-size: 14px;
+}
+
+.role-detail {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 18px;
+  width: 100%;
+  align-items: start;
+}
+.role-detail-when {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+.role-detail-years { font-weight: 600; }
+.role-detail-city { color: var(--mute); font-style: italic; }
+.role-detail-citycode {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 2px 6px;
+  border-radius: 2px;
+  align-self: flex-start;
+  margin-top: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.role-detail-role { font-weight: 600; font-size: 16px; line-height: 1.4; }
+.role-detail-org { color: var(--mute); font-size: 15px; margin-top: 2px; }
+.role-detail-note {
+  margin: 8px 0 0;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+@media (max-width: 1024px) { .career-chart-wrap { margin-left: -40px; margin-right: -40px; } }
+@media (max-width: 800px) {
+  .career-chart-wrap { margin-left: 0; margin-right: 0; padding: 18px 16px; }
+  .career-chart-head { flex-direction: column; gap: 4px; align-items: flex-start; }
+}
+@media (max-width: 540px) {
+  .role-detail { grid-template-columns: 1fr; gap: 8px; }
 }

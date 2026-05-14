@@ -34,6 +34,8 @@ export const travels: Travel[] = [
   { src: "/travels/26.jpg", alt: "Work travel", width: 1600, height: 1200 },
   { src: "/travels/27.jpg", alt: "Work travel", width: 1600, height: 888 },
   { src: "/travels/28.jpg", alt: "Work travel", width: 1600, height: 1198 },
+  { src: "/travels/29.jpg", alt: "Out and about", width: 1024, height: 1024 },
+  { src: "/travels/30.jpg", alt: "Out and about", width: 1024, height: 1024 },
 ];
 
 export const ALBUM_URL = "https://photos.app.goo.gl/REpyEw2T14UsGcju8";

@@ -9,11 +9,11 @@ export default function Hero() {
     <section className="hero" aria-labelledby="hero-name">
       <motion.img
         src="/headshot.jpg"
-        alt="Eugene Vestel with family"
+        alt="Eugene Vestel"
         className="hero-photo"
         style={{ y }}
-        width={1200}
-        height={900}
+        width={1024}
+        height={1024}
       />
       <div className="hero-text">
         <div className="dateline">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Reveal from "../components/Reveal";
 import USMap from "../components/USMap";
+import CareerChart from "../components/CareerChart";
 import { career, type City } from "../data/career";
 import { expertise, tenureYears, tenureContext } from "../data/expertise";
 import { events } from "../data/events";
@@ -25,6 +26,13 @@ export default function CareerPage() {
 
       <Reveal>
         <USMap activeCity={activeCity} onCityHover={setActiveCity} />
+      </Reveal>
+
+      <Reveal>
+        <section aria-labelledby="chart-h">
+          <h2 id="chart-h">Timeline chart</h2>
+          <CareerChart />
+        </section>
       </Reveal>
 
       <Reveal>
