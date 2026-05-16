@@ -458,6 +458,44 @@ a:focus-visible, button:focus-visible {
 .status-live    { background: var(--ink); color: var(--paper); }
 .status-archived{ color: var(--mute); border-color: var(--mute); }
 .project-card-body { margin: 0 0 12px; }
+.service-tagline {
+  margin: 0 0 10px;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--mute);
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+.service-proof {
+  margin: 12px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--rule);
+  font-size: 14px;
+  color: var(--mute);
+  line-height: 1.55;
+}
+.service-proof-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+.track-record {
+  list-style: none;
+  padding: 0;
+  margin: 0.6em 0 1.4em;
+  display: grid;
+  gap: 12px;
+}
+.track-record li {
+  padding-left: 14px;
+  border-left: 2px solid var(--ink);
+  line-height: 1.55;
+}
+.track-record strong {
+  font-weight: 600;
+}
 .stack {
   list-style: none;
   padding: 0;

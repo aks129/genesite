@@ -8,6 +8,7 @@ import { talks } from "./speaking";
 import { career, cityCoords } from "./career";
 import { expertise, tenureYears } from "./expertise";
 import { events } from "./events";
+import { services } from "./services";
 
 describe("data integrity", () => {
   it("projects have a name and description", () => {
@@ -98,6 +99,26 @@ describe("data integrity", () => {
       expect(t.width).toBeGreaterThan(0);
       expect(t.height).toBeGreaterThan(0);
     }
+  });
+
+  it("services have name, category, tagline, description; outcomes are non-empty when present", () => {
+    expect(services.length).toBeGreaterThanOrEqual(6);
+    const cats = new Set([
+      "Strategy & Governance",
+      "Implementation",
+      "Data & Analytics",
+      "Enablement",
+    ]);
+    for (const s of services) {
+      expect(s.name).toBeTruthy();
+      expect(cats.has(s.category)).toBe(true);
+      expect(s.tagline).toBeTruthy();
+      expect(s.description.length).toBeGreaterThan(40);
+      for (const o of s.outcomes ?? []) expect(o).toBeTruthy();
+      if (s.proof !== undefined) expect(s.proof.length).toBeGreaterThan(40);
+    }
+    const withProof = services.filter(s => s.proof);
+    expect(withProof.length).toBeGreaterThanOrEqual(4);
   });
 
   it("socials have label and absolute href (or mailto)", () => {
