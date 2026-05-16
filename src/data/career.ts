@@ -91,7 +91,7 @@ export const career: CareerRole[] = [
     role: "Director of Analytics",
     org: "b.well Connected Health",
     city: "PGH",
-    note: "Architected FHIR data ingestion, provider directory, and clinical data layers. Platform later selected by OpenAI to power ChatGPT Health.",
+    note: "Architected FHIR data ingestion, provider directory, and clinical data layers — the data layer behind Samsung Health and Google Fitbit integrations during my tenure, and later selected by OpenAI to power ChatGPT Health.",
   },
   {
     start: "Mar 2025",

@@ -22,7 +22,7 @@ export const services: Service[] = [
       "End-to-end delivery of AI features inside healthcare and analytics products — model selection, prompt and tool design, retrieval, evals, and the boring deployment plumbing that decides whether the thing actually ships.",
     outcomes: ["Production rollouts", "Evals + guardrails", "Vendor-agnostic"],
     proof:
-      "Led AI feature adoption inside a digital-health product org as the internal AI champion — the FHIR data layer I architected at b.well was later selected by OpenAI to power ChatGPT Health.",
+      "Led AI feature adoption inside a digital-health product org as the internal AI champion — the FHIR data layer I architected at b.well powered Samsung Health and Google Fitbit integrations during my time there, and was later selected by OpenAI to power ChatGPT Health.",
   },
   {
     name: "AI Governance",
@@ -102,7 +102,7 @@ export const services: Service[] = [
       "Building production FHIR applications using agentic coding workflows — SMART-on-FHIR auth, US Core conformance, and the agent-driven loop that turns specs into tested code with humans in the right places.",
     outcomes: ["SMART-on-FHIR apps", "US Core conformance", "Agentic delivery"],
     proof:
-      "Architected the FHIR ingestion, provider directory, and clinical data layers at b.well (selected by OpenAI to power ChatGPT Health). Currently shipping HealthClaw, Smart Health Connect, and FHIR Builders with agentic coding loops end-to-end.",
+      "Architected the FHIR ingestion, provider directory, and clinical data layers at b.well — the data layer behind Samsung Health and Google Fitbit integrations during my tenure, and later selected by OpenAI to power ChatGPT Health. Currently shipping HealthClaw, Smart Health Connect, and FHIR Builders with agentic coding loops end-to-end.",
   },
   {
     name: "Claude Code for Healthcare",

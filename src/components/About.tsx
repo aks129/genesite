@@ -27,8 +27,10 @@ export default function About() {
           Before this, I spent fifteen years inside large U.S. payer, provider,
           and digital health organizations. Director of Analytics at b.well
           Connected Health from 2022 to 2025, where I architected FHIR data
-          ingestion, the provider directory, and clinical data layers; the
-          platform was later selected by OpenAI to power ChatGPT Health. Five
+          ingestion, the provider directory, and clinical data layers — the
+          data layer behind Samsung Health and Google Fitbit integrations
+          during my tenure, and later selected by OpenAI to power ChatGPT
+          Health. Five
           years at UPMC, an $18B integrated payer-provider, leading quality
           analytics that delivered roughly $180M in cumulative impact across
           HEDIS, patient safety, and operational programs. Earlier roles at

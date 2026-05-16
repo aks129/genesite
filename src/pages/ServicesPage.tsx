@@ -46,10 +46,11 @@ export default function ServicesPage() {
               this space still has to clear.
             </li>
             <li>
-              <strong>b.well Connected Health · ChatGPT Health.</strong>{" "}
+              <strong>b.well Connected Health · Samsung Health, Google Fitbit, ChatGPT Health.</strong>{" "}
               Architected the FHIR ingestion, provider directory, and
-              clinical data layers; platform later selected by OpenAI to
-              power ChatGPT Health.
+              clinical data layers — the data layer behind Samsung Health
+              and Google Fitbit integrations during my tenure, and later
+              selected by OpenAI to power ChatGPT Health.
             </li>
             <li>
               <strong>AI champion inside a product org.</strong> Stood up the
