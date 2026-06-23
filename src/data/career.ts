@@ -111,8 +111,8 @@ export const career: CareerRole[] = [
   {
     start: "2025",
     end: "present",
-    role: "Senior Product Manager — Interoperability, AI & Analytics",
-    org: "Pharmacy technology platform",
+    role: "VP of AI — Data, AI & Analytics",
+    org: "Technology platform",
     city: "PGH",
   },
 ];

@@ -20,7 +20,7 @@ export const expertise: ExpertiseGroup[] = [
     heading: "AI & product",
     items: [
       "Agentic AI prototyping",
-      "Product management",
+      "AI strategy & leadership",
       "Idea → working agent in days",
       "AI champion (product organization)",
       "Discovery & roadmapping",
@@ -43,4 +43,4 @@ export const expertise: ExpertiseGroup[] = [
 
 export const tenureYears = 15;
 export const tenureContext =
-  "Healthcare data — across pharmacy, payer, provider, and digital health.";
+  "Data and AI — across healthcare (pharmacy, payer, provider, digital health) and beyond.";

@@ -37,8 +37,10 @@ export default function About() {
           Allegheny Health Network, Express Scripts, Medco, and Duane Reade.
         </p>
         <p>
-          By day, a Senior Product Manager leading interoperability, AI, and
-          analytics for a payer-side product team in pharmacy technology.
+          By day, VP of AI — leading data and AI strategy across product,
+          engineering, and analytics teams. On the side I advise organizations
+          on applied AI and data: in healthcare around FHIR and clinical data,
+          and increasingly well beyond it.
         </p>
         <p>
           I hold an MBA in Healthcare from the University of Pittsburgh's Katz
