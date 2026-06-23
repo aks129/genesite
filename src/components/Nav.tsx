@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 const items: { to: string; label: string }[] = [
   { to: "/", label: "home" },
   { to: "/career", label: "career" },
-  { to: "/services", label: "services" },
+  { to: "/expertise", label: "expertise" },
   { to: "/projects", label: "projects" },
   { to: "/writing", label: "writing" },
   { to: "/speaking", label: "speaking" },

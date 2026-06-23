@@ -33,6 +33,7 @@ export default function App() {
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/speaking" element={<SpeakingPage />} />
+          <Route path="/expertise" element={<ServicesPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="*" element={<Home />} />
         </Routes>

@@ -6,7 +6,7 @@ export default function About() {
       <section aria-labelledby="about-h">
         <h2 id="about-h">About Me</h2>
         <p>
-          My current bet is{" "}
+          I created{" "}
           <a href="https://healthclaw.io" target="_blank" rel="noopener noreferrer"><em>HealthClaw</em></a>,
           an open-source HIPAA-aware security and audit layer for AI agents
           working on clinical data. The thesis is that the cognitive layer above
@@ -38,9 +38,9 @@ export default function About() {
         </p>
         <p>
           By day, VP of AI — leading data and AI strategy across product,
-          engineering, and analytics teams. On the side I advise organizations
-          on applied AI and data: in healthcare around FHIR and clinical data,
-          and increasingly well beyond it.
+          engineering, and analytics teams. My work spans applied AI and data:
+          in healthcare around FHIR and clinical data, and increasingly well
+          beyond it.
         </p>
         <p>
           I hold an MBA in Healthcare from the University of Pittsburgh's Katz
