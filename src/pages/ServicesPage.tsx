@@ -17,13 +17,12 @@ export default function ServicesPage() {
     <>
       <Reveal>
         <header className="page-head">
-          <div className="dateline">Consulting · Services</div>
-          <h1>How I work with teams.</h1>
+          <div className="dateline">Expertise</div>
+          <h1>What I work on.</h1>
           <p className="lede">
-            A small number of engagements at a time, focused on the seam between
-            AI, FHIR, and the analytics layer underneath. Most start as a
-            two-week prototype or a workshop and grow from there. If something
-            below sounds close to what you're trying to do, get in touch.
+            The areas where I spend the most time — the seam between AI, FHIR,
+            and the analytics layer underneath. Below is what that looks like in
+            practice, and where I've done it.
           </p>
         </header>
       </Reveal>
@@ -84,22 +83,6 @@ export default function ServicesPage() {
           </section>
         </Reveal>
       ))}
-
-      <Reveal>
-        <section aria-labelledby="services-cta-h">
-          <h2 id="services-cta-h">Get in touch</h2>
-          <p>
-            Email{" "}
-            <a href="mailto:gene@fhiriq.com">gene@fhiriq.com</a>{" "}
-            or{" "}
-            <a href="https://calendar.app.google/EtMLLLeZmA42877T9" target="_blank" rel="noopener noreferrer">
-              grab time directly on my calendar
-            </a>
-            . I'll respond in a day or two with whether it's a fit and what a
-            useful first step would look like.
-          </p>
-        </section>
-      </Reveal>
     </>
   );
 }
