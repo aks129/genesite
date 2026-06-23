@@ -21,7 +21,8 @@ export default function Hero() {
         </div>
         <h1 id="hero-name">Eugene Vestel</h1>
         <p className="lede">
-          I'm building HIPAA-aware AI agents for clinical data, and writing about
+          VP of AI building data and AI systems — agentic tools and the
+          governance around them, in healthcare and beyond — and writing about
           what's coming next.
         </p>
         <p className="hero-callout">
