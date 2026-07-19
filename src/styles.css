@@ -199,25 +199,8 @@ a:focus-visible, button:focus-visible {
   margin-bottom: 2.4em;
 }
 
-.hero-photo {
-  display: block;
-  width: 100%;
-  max-width: 480px;
-  height: auto;
-  margin: 0 auto;
-  background: #EFEFEF;
-  border-radius: 4px;
-  box-shadow:
-    0 1px 2px rgba(10, 10, 10, 0.06),
-    0 8px 24px rgba(10, 10, 10, 0.10);
-}
-
 .hero-text { width: 100%; }
 .hero h1 { margin-bottom: 16px; }
-
-@media (max-width: 540px) {
-  .hero-photo { max-width: 100%; }
-}
 
 .hero-callout {
   font-size: 14px;
@@ -281,40 +264,6 @@ a:focus-visible, button:focus-visible {
   .passions-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
-/* Polaroid scrapbook gallery — breaks out of the 640px column for scale */
-.travels-grid {
-  column-count: 3;
-  column-gap: 28px;
-  margin: 2em -120px 1.4em;
-  perspective: 1200px;
-}
-.travels-grid .polaroid {
-  margin: 0 0 28px;
-  break-inside: avoid;
-  display: block;
-  background: #FFFFFF;
-  padding: 10px 10px 36px;
-  box-shadow:
-    0 1px 2px rgba(10, 10, 10, 0.06),
-    0 6px 18px rgba(10, 10, 10, 0.12);
-  cursor: pointer;
-  will-change: transform;
-}
-.travels-grid .polaroid img {
-  width: 100%;
-  height: auto;
-  display: block;
-  background: #EFEFEF;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-.album-link {
-  font-size: 16px;
-  color: var(--mute);
-  margin-top: 0.6em;
-}
-
 /* LEGO Gene mascot — fixed at the bottom of the viewport, walks side-to-side */
 .lego-gene {
   position: fixed;
@@ -337,12 +286,6 @@ a:focus-visible, button:focus-visible {
   .lego-gene { width: 40px; height: 54px; bottom: 8px; }
   .lego-gene svg { width: 40px; height: 54px; }
 }
-
-@media (max-width: 1024px) {
-  .travels-grid { margin-left: -40px; margin-right: -40px; column-count: 3; }
-}
-@media (max-width: 960px)  { .travels-grid { column-count: 2; column-gap: 20px; margin-left: -20px; margin-right: -20px; } .travels-grid .polaroid { margin-bottom: 22px; padding: 8px 8px 28px; } }
-@media (max-width: 540px)  { .travels-grid { column-count: 1; margin-left: 0; margin-right: 0; column-gap: 0; } }
 
 .contact-intro {
   color: var(--mute);

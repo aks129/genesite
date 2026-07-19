@@ -27,7 +27,7 @@ export const passions: Passion[] = [
     kind: "personal",
     title: "Travel with Stacy",
     body:
-      "My wife Stacy and I plan trips the way other people plan careers. The work-travel section below is mostly her doing.",
+      "My wife Stacy and I plan trips the way other people plan careers. Most of the good ideas are hers.",
   },
   {
     kind: "personal",

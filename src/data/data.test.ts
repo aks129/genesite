@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { projects } from "./projects";
 import { passions } from "./passions";
-import { travels } from "./travels";
 import { socials } from "./socials";
 import { writings } from "./writings";
 import { talks } from "./speaking";
@@ -89,15 +88,6 @@ describe("data integrity", () => {
     for (const p of passions) {
       expect(p.title).toBeTruthy();
       expect(p.body.length).toBeGreaterThan(40);
-    }
-  });
-
-  it("travels reference files in /travels/ with alt text and intrinsic dimensions", () => {
-    for (const t of travels) {
-      expect(t.src).toMatch(/^\/travels\/.+\.(jpg|jpeg|png|webp)$/i);
-      expect(t.alt).toBeTruthy();
-      expect(t.width).toBeGreaterThan(0);
-      expect(t.height).toBeGreaterThan(0);
     }
   });
 
