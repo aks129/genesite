@@ -22,7 +22,7 @@ export const services: Service[] = [
       "End-to-end delivery of AI features inside healthcare and analytics products — model selection, prompt and tool design, retrieval, evals, and the boring deployment plumbing that decides whether the thing actually ships.",
     outcomes: ["Production rollouts", "Evals + guardrails", "Vendor-agnostic"],
     proof:
-      "Led AI feature adoption inside a digital-health product org as the internal AI champion — the FHIR data layer I architected at b.well powered Samsung Health and Google Fitbit integrations during my time there, and was later selected by OpenAI to power ChatGPT Health.",
+      "Led AI feature adoption inside a digital-health product org, and built the FHIR data ingestion and clinical data layers at b.well.",
   },
   {
     name: "AI Governance",
@@ -37,7 +37,7 @@ export const services: Service[] = [
   {
     name: "Information Modeling & Semantic Layer",
     category: "Data & Analytics",
-    tagline: "The layer your AI actually needs",
+    tagline: "Shared definitions for people and agents",
     description:
       "Designing the conceptual, logical, and physical data layers behind a working semantic model — entities, measures, lineage, glossary — so dashboards, agents, and downstream apps speak the same language about the same facts.",
     outcomes: ["Conformed dimensions", "Governed metrics", "Agent-ready schema"],
@@ -61,7 +61,7 @@ export const services: Service[] = [
   {
     name: "AI Operating Model for Engineering + Product",
     category: "Strategy & Governance",
-    tagline: "Wire AI into how teams actually ship",
+    tagline: "How AI fits the way teams ship",
     description:
       "An operating model for engineering and product orgs adopting AI: how PMs scope, how engineers prototype, where evals live, who owns model decisions, and how the work gets reviewed. Less framework, more how-we-work.",
     outcomes: ["Roles & rituals", "Eval ownership", "Adoption metrics"],
@@ -81,7 +81,7 @@ export const services: Service[] = [
     category: "Enablement",
     tagline: "Hands-on, role-specific",
     description:
-      "Workshops and cohort training tuned to the role — engineers, product, analysts, clinical informatics. Every session ships something the team uses the next day. No generic 'prompt engineering' decks.",
+      "Workshops and cohort training tuned to the role — engineers, product, analysts, clinical informatics. Every session ends with something the team can use the next day.",
     outcomes: ["Role-specific tracks", "Working artifacts", "Cohort follow-up"],
   },
   {
@@ -92,7 +92,7 @@ export const services: Service[] = [
       "Quality measurement built on FHIR with AI in the loop — chart abstraction, numerator/denominator validation, gap closure workflows, and narrative explanations of why a member did or didn't qualify for a measure.",
     outcomes: ["Measure validation", "Chart abstraction", "Gap closure"],
     proof:
-      "Five years leading HEDIS and quality analytics at UPMC Health Plan with ~$180M cumulative impact across HEDIS, patient-safety, and operational programs. Later served as Digital Quality & FHIR Advisor to NCQA.",
+      "Five years leading HEDIS and quality analytics at UPMC Health Plan, then Digital Quality & FHIR Advisor to NCQA.",
   },
   {
     name: "FHIR Application Development with Agentic Coding",
@@ -102,7 +102,7 @@ export const services: Service[] = [
       "Building production FHIR applications using agentic coding workflows — SMART-on-FHIR auth, US Core conformance, and the agent-driven loop that turns specs into tested code with humans in the right places.",
     outcomes: ["SMART-on-FHIR apps", "US Core conformance", "Agentic delivery"],
     proof:
-      "Architected the FHIR ingestion, provider directory, and clinical data layers at b.well — the data layer behind Samsung Health and Google Fitbit integrations during my tenure, and later selected by OpenAI to power ChatGPT Health. Currently shipping HealthClaw, Smart Health Connect, and FHIR Builders with agentic coding loops end-to-end.",
+      "Built the FHIR ingestion, provider directory, and clinical data layers at b.well. Currently shipping HealthClaw, Smart Health Connect, and FHIR Builders with agentic coding loops end to end.",
   },
   {
     name: "Claude Code for Healthcare",

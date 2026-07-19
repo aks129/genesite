@@ -83,7 +83,7 @@ export const career: CareerRole[] = [
     role: "Manager, Strategic Data Management & Quality Analytics",
     org: "UPMC Health Plan",
     city: "PGH",
-    note: "Five years. Roughly $180M of cumulative impact across HEDIS, patient-safety, and operational programs.",
+    note: "Five years leading HEDIS, patient-safety, and operational quality analytics.",
   },
   {
     start: "2022",
@@ -91,7 +91,7 @@ export const career: CareerRole[] = [
     role: "Director of Analytics",
     org: "b.well Connected Health",
     city: "PGH",
-    note: "Architected FHIR data ingestion, provider directory, and clinical data layers — the data layer behind Samsung Health and Google Fitbit integrations during my tenure, and later selected by OpenAI to power ChatGPT Health.",
+    note: "Built the FHIR data ingestion, provider directory, and clinical data layers.",
   },
   {
     start: "Mar 2025",

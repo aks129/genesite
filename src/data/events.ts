@@ -20,20 +20,20 @@ export const events: Event[] = [
       "Conversational interoperability",
     ],
     description:
-      "Participant across multiple tracks at the Pittsburgh-hosted connectathon. Hands-on work on digital quality measurement and the conversational-interoperability track that is one of the staging grounds for the cognitive layer above FHIR.",
+      "Participant across multiple tracks at the Pittsburgh-hosted connectathon, with hands-on work on digital quality measurement and conversational interoperability.",
   },
   {
     when: "2025",
     org: "Devpost",
     title: "Agents Assemble AI Hackathon",
     description:
-      "Multiple submissions exploring agentic clinical workflows, HIPAA-aware tool patterns, and the runtime guardrails that HealthClaw is built around.",
+      "Multiple submissions exploring agentic clinical workflows, HIPAA-aware tool patterns, and the guardrails that became HealthClaw.",
   },
   {
     when: "Ongoing",
     org: "HL7",
     title: "Working group connectathons",
     description:
-      "Regular participant in quality-measure and interoperability tracks. Where standards meet implementation reality — the room where the actual seams get worked out.",
+      "Regular participant in quality-measure and interoperability tracks — the fastest way to find out whether a spec survives contact with real implementations.",
   },
 ];

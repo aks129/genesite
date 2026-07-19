@@ -18,9 +18,8 @@ export default function Travels() {
       <section aria-labelledby="travels-h">
         <h2 id="travels-h">Work Travels</h2>
         <p>
-          Most of what makes a career interesting is the rooms you end up in. A
-          scrapbook of recent trips with Stacy and the team — hover any photo to
-          straighten it.
+          A scrapbook of recent trips with Stacy and the team. Hover any photo
+          to straighten it.
         </p>
 
         <motion.div

@@ -33,41 +33,36 @@ export default function ServicesPage() {
           <ul className="track-record">
             <li>
               <strong>NCQA · Digital Quality & FHIR Advisor.</strong> Advised
-              NCQA on the next generation of digital quality measurement — the
-              FHIR data plumbing and conformance work that has to be right
-              before AI can be trusted anywhere near a measure.
+              NCQA on the next generation of digital quality measurement and
+              the FHIR conformance work underneath it.
             </li>
             <li>
-              <strong>UPMC Health Plan · ~$180M cumulative impact.</strong>{" "}
+              <strong>UPMC Health Plan · quality analytics.</strong>{" "}
               Five years leading HEDIS, patient-safety, and operational
-              quality analytics — the discipline (measure validation,
-              numerator/denominator integrity, gap closure) that AI work in
-              this space still has to clear.
+              quality analytics, with roughly $180M in cumulative impact
+              across those programs.
             </li>
             <li>
-              <strong>b.well Connected Health · Samsung Health, Google Fitbit, ChatGPT Health.</strong>{" "}
-              Architected the FHIR ingestion, provider directory, and
-              clinical data layers — the data layer behind Samsung Health
-              and Google Fitbit integrations during my tenure, and later
-              selected by OpenAI to power ChatGPT Health.
+              <strong>b.well Connected Health · Director of Analytics.</strong>{" "}
+              Built the FHIR ingestion, provider directory, and clinical data
+              layers for a consumer health-records platform.
             </li>
             <li>
-              <strong>AI champion inside a product org.</strong> Stood up the
-              adoption playbook — PM scoping, engineering prototyping, eval
-              ownership, design-partner enablement — so AI work shipped
-              instead of stalling in committee.
+              <strong>AI adoption inside a product org.</strong> Set up the
+              playbook for how PMs scope AI work, how engineers prototype it,
+              who owns evals, and how design partners get enabled.
             </li>
             <li>
-              <strong>HealthClaw · HIPAA-aware agentic governance.</strong>{" "}
-              Founded the project that maps agentic AI controls (twelve MCP
-              tools, multi-step human approval for clinical writes,
-              HMAC-confirmed audit) to the OWASP Agentic AI Top 10 and the
-              2025 HIPAA Security Rule update.
+              <strong>HealthClaw · HIPAA-aware agent controls.</strong>{" "}
+              Founded the project, which maps agent controls (PHI redaction,
+              multi-step human approval for clinical writes, HMAC-confirmed
+              audit) to the OWASP Agentic AI Top 10 and the 2025 HIPAA
+              Security Rule update.
             </li>
             <li>
               <strong>CMS RFI · public response.</strong> Authored FHIR IQ's
-              public response on the health-technology interoperability
-              impasse and market design. Submitted to CMS.
+              public response to CMS on health-technology interoperability
+              and market design.
             </li>
           </ul>
         </section>

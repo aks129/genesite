@@ -12,9 +12,9 @@ export default function SpeakingPage() {
           <div className="dateline">Speaking · panels · meetups</div>
           <h1>Talks, panels, and the meetup.</h1>
           <p className="lede">
-            A small number of speaking engagements each year — keynotes, panels,
-            podcast guesting, internal AI + FHIR talks for product orgs trying
-            to figure out where the floor is.
+            A handful of speaking engagements each year — conference talks,
+            panels, podcast guesting, and internal AI + FHIR sessions for
+            product teams.
           </p>
         </header>
       </Reveal>
@@ -74,8 +74,8 @@ export default function SpeakingPage() {
         <section aria-labelledby="invite-h">
           <h2 id="invite-h">Want me to speak?</h2>
           <p>
-            Available for keynotes, panels, podcast guesting, and internal AI +
-            FHIR talks.{" "}
+            Available for conference talks, panels, podcast guesting, and
+            internal AI + FHIR sessions.{" "}
             <a href="mailto:gene@fhiriq.com">Get in touch.</a>{" "}
             Or{" "}
             <a href="https://calendar.app.google/EtMLLLeZmA42877T9" target="_blank" rel="noopener noreferrer">

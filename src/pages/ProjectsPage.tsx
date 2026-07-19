@@ -9,9 +9,9 @@ export default function ProjectsPage() {
           <div className="dateline">Technical · Projects</div>
           <h1>What I'm building.</h1>
           <p className="lede">
-            Twenty-six public repositories, one bet. The work below sits at the
-            seam where FHIR, clinical data, and AI agents meet — the cognitive
-            layer above FHIR being rebuilt for agents.
+            Most of this sits where FHIR, clinical data, and AI agents meet:
+            tooling for letting agents work with health records without
+            anyone getting hurt.
           </p>
         </header>
       </Reveal>

@@ -16,10 +16,10 @@ export default function CareerPage() {
           <div className="dateline">Career · 2003 → present</div>
           <h1>From Brooklyn to Pittsburgh.</h1>
           <p className="lede">
-            Two decades on a fairly specific path: pharmacy → payer → provider →
-            digital health → AI. The throughline is the same — making clinical
-            data actually move, actually count, and actually change what happens
-            to patients.
+            Two decades on a fairly specific path: pharmacy, then payer,
+            provider, digital health, and now AI. The common thread is getting
+            clinical data to move between systems and mean something when it
+            arrives.
           </p>
         </header>
       </Reveal>
@@ -91,8 +91,8 @@ export default function CareerPage() {
         <section aria-labelledby="events-h">
           <h2 id="events-h">Connectathons &amp; hackathons</h2>
           <p>
-            Standards live or die on whether anyone actually shows up to plug
-            implementations into each other. The rooms below are where I show up.
+            Standards live or die on whether people show up and plug their
+            implementations into each other. These are the ones I attend.
           </p>
           <ul className="event-list">
             {events.map((e, i) => (
@@ -123,13 +123,11 @@ export default function CareerPage() {
 
       <Reveal>
         <section aria-labelledby="next-h">
-          <h2 id="next-h">Where this is going</h2>
+          <h2 id="next-h">What's next</h2>
           <p>
-            The next decade of healthcare data is being decided right now — at
-            the seam where AI agents meet clinical systems. HealthClaw is my bet
-            on what the runtime layer underneath that looks like, and the
-            writing and speaking is the public side of trying to get the FHIR
-            community to take this seriously before policy and audit catch up.
+            Right now I'm focused on what happens when AI agents meet clinical
+            systems. HealthClaw is the building side of that; the newsletter and
+            the podcast are the writing-it-down side.
           </p>
         </section>
       </Reveal>

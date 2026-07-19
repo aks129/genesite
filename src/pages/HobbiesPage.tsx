@@ -8,11 +8,10 @@ export default function HobbiesPage() {
     <>
       <Reveal>
         <header className="page-head">
-          <div className="dateline">Outside work · the human stuff</div>
-          <h1>Hobbies, family, side quests.</h1>
+          <div className="dateline">Outside work</div>
+          <h1>Off hours.</h1>
           <p className="lede">
-            What I do when I am not in tabs. Mostly family, mostly outside,
-            occasionally a guitar.
+            Mostly family, mostly outside, occasionally a guitar.
           </p>
         </header>
       </Reveal>

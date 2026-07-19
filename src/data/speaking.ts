@@ -14,7 +14,7 @@ export const talks: Talk[] = [
     title: "FHIR DevDays",
     venue: "FHIR DevDays · Amsterdam",
     description:
-      "Speaking on the cognitive layer being built above FHIR — and what the FHIR community needs to do about HIPAA-aware AI agents before policy and audit catch up.",
+      "Speaking on HIPAA-aware AI agents: what changes when agents can read and write clinical data, and what that asks of the FHIR community.",
     href: "https://devdays.com",
   },
   {

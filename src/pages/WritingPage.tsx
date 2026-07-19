@@ -7,11 +7,10 @@ export default function WritingPage() {
       <Reveal>
         <header className="page-head">
           <div className="dateline">Writing · podcast · Substack</div>
-          <h1>The thing I publish in the open.</h1>
+          <h1>Newsletter and podcast.</h1>
           <p className="lede">
-            One newsletter, one podcast, one thesis: the cognitive layer above
-            FHIR is being rebuilt for agents, and the FHIR community needs to
-            be paying attention.
+            One newsletter and one podcast, both about FHIR, healthcare data,
+            and what changes when AI agents show up.
           </p>
         </header>
       </Reveal>
