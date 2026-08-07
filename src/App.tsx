@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import WindBackground from "./components/WindBackground";
 import LegoGene from "./components/LegoGene";
 import Nav from "./components/Nav";
@@ -39,6 +40,7 @@ export default function App() {
         </Routes>
       </main>
       <LegoGene />
+      <Analytics />
     </BrowserRouter>
   );
 }
