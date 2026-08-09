@@ -22,6 +22,7 @@ export type CareerRole = {
   org: string;
   city: City;
   note?: string;
+  kind?: "education";     // omitted → work; "education" renders in its own section
 };
 
 export const career: CareerRole[] = [
@@ -32,6 +33,7 @@ export const career: CareerRole[] = [
     org: "Brooklyn College",
     city: "NYC",
     note: "Where it started. Working at Duane Reade through school.",
+    kind: "education",
   },
   {
     start: "2003",
@@ -76,6 +78,7 @@ export const career: CareerRole[] = [
     role: "MBA, Healthcare",
     org: "University of Pittsburgh — Katz School of Business",
     city: "PGH",
+    kind: "education",
   },
   {
     start: "2017",
@@ -106,7 +109,7 @@ export const career: CareerRole[] = [
     role: "Founder",
     org: "HealthClaw",
     city: "PGH",
-    note: "HIPAA-aware AI agent infrastructure for clinical data.",
+    note: "Open-source side project — HIPAA-aware AI agent infrastructure for clinical data.",
   },
   {
     start: "2025",

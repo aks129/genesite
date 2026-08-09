@@ -36,7 +36,7 @@ export default function ProjectsPage() {
             and the{" "}
             <a href="https://github.com/FHIR-IQ" target="_blank" rel="noopener noreferrer">
               FHIR&#8209;IQ org
-            </a>. Some are production-ready, most are experiments.
+            </a>.
           </p>
         </section>
       </Reveal>

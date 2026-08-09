@@ -5,7 +5,7 @@ const items: { to: string; label: string }[] = [
   { to: "/career", label: "career" },
   { to: "/expertise", label: "expertise" },
   { to: "/projects", label: "projects" },
-  { to: "/writing", label: "writing" },
+  { to: "/writing", label: "podcast + writing" },
   { to: "/speaking", label: "speaking" },
   { to: "/hobbies", label: "hobbies" },
 ];

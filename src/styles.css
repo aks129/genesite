@@ -295,28 +295,49 @@ a:focus-visible, button:focus-visible {
   font-variation-settings: "opsz" 60, "SOFT" 30, "WONK" 1;
 }
 
-.hero-callout {
-  font-size: 14px;
-  font-family: var(--mono);
+.hero-id {
+  font-size: 15px;
   color: var(--text-soft);
-  margin: 1em 0 0;
+  margin: 26px 0 0;
+}
+.hero-id em { font-style: italic; }
+.hero-id a { color: var(--text); }
+
+.hero-ctas {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 22px;
 }
-.hero-callout .tag {
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #16131A;
-  background: var(--pop);
-  padding: 4px 9px;
+.hero-cta {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(133, 119, 243, 0.55);
   border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
 }
-.hero-callout .sep { opacity: 0.5; margin: 0 4px; }
+.hero-cta:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.hero-cta-quiet {
+  border-color: var(--rule);
+  color: var(--text-soft);
+}
+.hero-cta-quiet:hover {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: none;
+}
 
 /* ---- Home · two pillars ---- */
 .pillar-grid {
@@ -844,6 +865,60 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 640px) {
   .talk-item { grid-template-columns: 1fr; gap: 6px; }
   .upcoming-block { padding: 20px; }
+}
+
+/* ---- /writing · recent items ---- */
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+.recent-list li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+.recent-list li:last-child { border-bottom: 1px solid var(--rule); }
+.recent-date {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-faint);
+  padding-top: 1px;
+}
+.recent-list a { color: var(--text); }
+@media (max-width: 540px) {
+  .recent-list li { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* ---- /career · education ---- */
+.education-list {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+  display: grid;
+  gap: 14px;
+}
+.education-list li {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+.education-list li:last-child { border-bottom: 1px solid var(--rule); }
+.education-years {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+}
+.education-degree { font-weight: 600; font-size: 16px; }
+.education-org { color: var(--text-soft); font-size: 15px; }
+@media (max-width: 540px) {
+  .education-list li { grid-template-columns: 1fr; gap: 4px; }
 }
 
 /* ---- /hobbies page ---- */

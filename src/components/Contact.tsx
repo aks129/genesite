@@ -6,14 +6,9 @@ export default function Contact() {
       <section aria-labelledby="contact-h">
         <h2 id="contact-h">Get in Touch</h2>
         <p className="contact-intro">
-          Two ways. Email for anything async — I read everything and respond
-          to most things within a week. Or grab time on my calendar if you'd
-          rather just talk.
+          The fastest path is the calendar. Email works for anything async.
         </p>
         <div className="contact-actions">
-          <a className="contact-mail" href="mailto:gene@fhiriq.com">
-            gene@fhiriq.com
-          </a>
           <a
             className="contact-book"
             href="https://calendar.app.google/EtMLLLeZmA42877T9"
@@ -21,6 +16,9 @@ export default function Contact() {
             rel="noopener noreferrer"
           >
             Book a meeting →
+          </a>
+          <a className="contact-mail" href="mailto:gene@fhiriq.com">
+            gene@fhiriq.com
           </a>
         </div>
       </section>

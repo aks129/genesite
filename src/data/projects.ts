@@ -13,7 +13,7 @@ export const projects: Project[] = [
   {
     name: "HealthClaw",
     href: "https://healthclaw.io",
-    repo: "https://github.com/aks129",
+    repo: "https://github.com/aks129/HealthClawGuardrails",
     status: "beta",
     stack: ["TypeScript", "MCP", "FHIR R4/R6", "US Core v9", "HMAC audit"],
     description:
@@ -28,6 +28,7 @@ export const projects: Project[] = [
   },
   {
     name: "Smart Health Connect",
+    repo: "https://github.com/aks129/SmartHealthConnect",
     status: "beta",
     stack: ["SMART-on-FHIR", "Epic", "Cerner", "OAuth2"],
     description:

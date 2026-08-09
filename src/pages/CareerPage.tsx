@@ -8,6 +8,8 @@ import { events } from "../data/events";
 
 export default function CareerPage() {
   const [activeCity, setActiveCity] = useState<City | null>(null);
+  const work = career.filter(r => r.kind !== "education");
+  const education = career.filter(r => r.kind === "education");
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function CareerPage() {
         <section aria-labelledby="timeline-h">
           <h2 id="timeline-h">The timeline</h2>
           <ol className="career-timeline">
-            {career.map((r, i) => (
+            {work.map((r, i) => (
               <li
                 key={`${r.org}-${r.start}-${i}`}
                 className={`career-item${activeCity === r.city ? " is-active" : ""}`}
@@ -58,6 +60,23 @@ export default function CareerPage() {
               </li>
             ))}
           </ol>
+        </section>
+      </Reveal>
+
+      <Reveal>
+        <section aria-labelledby="education-h">
+          <h2 id="education-h">Education</h2>
+          <ul className="education-list">
+            {education.map(r => (
+              <li key={r.org}>
+                <span className="education-years">{r.start} → {r.end}</span>
+                <div>
+                  <div className="education-degree">{r.role}</div>
+                  <div className="education-org">{r.org}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
       </Reveal>
 

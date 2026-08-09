@@ -15,7 +15,7 @@ export default function About() {
           <Link to="/writing">writing page</Link>.
         </p>
         <p>
-          The longer story — fifteen years across pharmacy, payer, provider,
+          The longer story — two decades across pharmacy, payer, provider,
           and digital health — is on the <Link to="/career">career page</Link>.
         </p>
       </section>

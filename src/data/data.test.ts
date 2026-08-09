@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { projects } from "./projects";
 import { passions } from "./passions";
 import { socials } from "./socials";
-import { writings } from "./writings";
+import { writings, recentItems } from "./writings";
 import { talks } from "./speaking";
 import { career, cityCoords } from "./career";
 import { expertise, tenureYears } from "./expertise";
@@ -32,6 +32,15 @@ describe("data integrity", () => {
         expect(p.label).toBeTruthy();
         expect(p.href).toMatch(/^https?:\/\//);
       }
+    }
+  });
+
+  it("recent items have date, title, and absolute href", () => {
+    expect(recentItems.length).toBeGreaterThanOrEqual(3);
+    for (const r of recentItems) {
+      expect(r.date).toBeTruthy();
+      expect(r.title).toBeTruthy();
+      expect(r.href).toMatch(/^https?:\/\//);
     }
   });
 

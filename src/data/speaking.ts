@@ -9,7 +9,7 @@ export type Talk = {
 
 export const talks: Talk[] = [
   {
-    year: "2026",
+    year: "Jun 2026",
     title: "FHIR DevDays",
     venue: "FHIR DevDays · Amsterdam",
     description:

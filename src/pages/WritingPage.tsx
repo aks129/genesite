@@ -1,5 +1,5 @@
 import Reveal from "../components/Reveal";
-import { writings } from "../data/writings";
+import { writings, recentItems } from "../data/writings";
 
 export default function WritingPage() {
   return (
@@ -36,6 +36,22 @@ export default function WritingPage() {
           </section>
         </Reveal>
       ))}
+
+      <Reveal>
+        <section aria-labelledby="recent-h">
+          <h2 id="recent-h">Recent</h2>
+          <ul className="recent-list">
+            {recentItems.map(item => (
+              <li key={item.href}>
+                <span className="recent-date">{item.date}</span>
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </Reveal>
 
       <Reveal>
         <section aria-labelledby="archive-h">
