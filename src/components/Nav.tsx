@@ -14,7 +14,7 @@ export default function Nav() {
   return (
     <nav className="top-nav" aria-label="Primary">
       <div className="top-nav-inner">
-        <Link to="/" className="brand">Eugene Vestel</Link>
+        <Link to="/" className="brand">Gene</Link>
         <ul>
           {items.map(({ to, label }) => (
             <li key={to}>

@@ -50,9 +50,11 @@ void main() {
   vec2 q = vec2(fbm(uv * 1.2 + vec2(t, 0.0)), fbm(uv * 1.2 + vec2(0.0, t)));
   float f = fbm(uv * 2.5 + q * 1.8 + vec2(t * 0.3, t * 0.5));
 
-  // Map to a very narrow near-white band
-  float v = mix(0.957, 0.980, smoothstep(0.3, 0.7, f));
-  gl_FragColor = vec4(v, v, v, 1.0);
+  // Drift between near-black and a faint violet wash — narrow band, no drama.
+  vec3 base = vec3(0.075, 0.071, 0.086);
+  vec3 wash = vec3(0.104, 0.092, 0.155);
+  vec3 c = mix(base, wash, smoothstep(0.25, 0.75, f));
+  gl_FragColor = vec4(c, 1.0);
 }
 `;
 

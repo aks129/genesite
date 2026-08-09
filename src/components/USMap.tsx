@@ -94,7 +94,7 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
         {/* Subtle dotted-paper background grid */}
         <defs>
           <pattern id="paper-dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="0.6" fill="#E0DED7" />
+            <circle cx="1" cy="1" r="0.6" fill="#26232F" />
           </pattern>
         </defs>
         <rect x="0" y="0" width={W} height={H} fill="url(#paper-dots)" />
@@ -102,8 +102,8 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
         {/* USA outline — hand-traced, ink stroke */}
         <path
           d={USA_PATH}
-          fill="#FDFCF9"
-          stroke="#0A0A0A"
+          fill="#211F29"
+          stroke="#C9C5D8"
           strokeWidth="1.4"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -113,7 +113,7 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
         <motion.path
           d={pathD}
           fill="none"
-          stroke="#0A0A0A"
+          stroke="#8577F3"
           strokeWidth="1.6"
           strokeLinecap="round"
           strokeDasharray="2 8"
@@ -136,8 +136,8 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
             >
               <motion.circle
                 r={isActive ? 11 : 7}
-                fill="#0A0A0A"
-                stroke="#FFFFFF"
+                fill={isActive ? "#8577F3" : "#F2F0EC"}
+                stroke="#131216"
                 strokeWidth="2"
                 initial={reduce ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -147,7 +147,7 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
                 <motion.circle
                   r={7}
                   fill="none"
-                  stroke="#0A0A0A"
+                  stroke="#8577F3"
                   strokeWidth="1"
                   initial={{ scale: 1, opacity: 0.6 }}
                   animate={{ scale: 2.4, opacity: 0 }}
@@ -159,9 +159,9 @@ export default function USMap({ activeCity = null, onCityHover }: Props) {
                 y={city === "NJ" ? 26 : -16}
                 textAnchor="middle"
                 fontSize="14"
-                fontFamily='"Newsreader", serif'
+                fontFamily='"Fraunces Variable", Georgia, serif'
                 fontWeight="600"
-                fill="#0A0A0A"
+                fill="#F2F0EC"
                 style={{ pointerEvents: "none" }}
               >
                 {label}

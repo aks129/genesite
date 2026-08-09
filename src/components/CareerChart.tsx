@@ -93,7 +93,7 @@ export default function CareerChart() {
               y1={TOP_PAD - 6}
               x2={xFor(t)}
               y2={viewBoxH - BOTTOM_PAD}
-              stroke="#E5E5E5"
+              stroke="#2B2933"
               strokeWidth="1"
               shapeRendering="crispEdges"
             />
@@ -102,8 +102,8 @@ export default function CareerChart() {
               y={TOP_PAD - 14}
               textAnchor="middle"
               fontSize="13"
-              fontFamily='"Newsreader", serif'
-              fill="#6B6B6B"
+              fontFamily='"Spline Sans Mono Variable", monospace'
+              fill="#6E6A7A"
             >
               {t}
             </text>
@@ -116,7 +116,7 @@ export default function CareerChart() {
           y1={viewBoxH - BOTTOM_PAD}
           x2={chartRight}
           y2={viewBoxH - BOTTOM_PAD}
-          stroke="#0A0A0A"
+          stroke="#4A4656"
           strokeWidth="1.2"
           shapeRendering="crispEdges"
         />
@@ -148,7 +148,7 @@ export default function CareerChart() {
                 y={y}
                 width={w}
                 height={BAR_HEIGHT}
-                fill={isActive ? "#0A0A0A" : isDim ? "#C9C9C9" : "#0A0A0A"}
+                fill={isActive ? "#8577F3" : isDim ? "#3A3646" : "#E9E6F2"}
                 rx="2"
                 initial={reduce ? { scaleX: 1 } : { scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -162,7 +162,7 @@ export default function CareerChart() {
                   y={y + BAR_HEIGHT / 2 + 4}
                   fontSize="11"
                   fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-                  fill="#FFFFFF"
+                  fill="#16141B"
                   style={{ pointerEvents: "none" }}
                 >
                   {label}
@@ -173,7 +173,7 @@ export default function CareerChart() {
                   y={y + BAR_HEIGHT / 2 + 4}
                   fontSize="11"
                   fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-                  fill="#0A0A0A"
+                  fill="#D8D5E4"
                   style={{ pointerEvents: "none" }}
                 >
                   {label}
@@ -184,8 +184,8 @@ export default function CareerChart() {
                 cx={chartLeft - 8}
                 cy={y + BAR_HEIGHT / 2}
                 r="3"
-                fill={role.city === "NYC" ? "#0A0A0A" : role.city === "NJ" ? "#6B6B6B" : "#FFFFFF"}
-                stroke="#0A0A0A"
+                fill={role.city === "NYC" ? "#F2F0EC" : role.city === "NJ" ? "#6E6A7A" : "#8577F3"}
+                stroke="#131216"
                 strokeWidth="1"
               />
             </g>

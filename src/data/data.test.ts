@@ -35,7 +35,7 @@ describe("data integrity", () => {
     }
   });
 
-  it("talks have year, title, venue, description; upcoming talks flagged", () => {
+  it("talks have year, title, venue, description", () => {
     expect(talks.length).toBeGreaterThan(0);
     for (const t of talks) {
       expect(t.year).toBeTruthy();
@@ -44,8 +44,6 @@ describe("data integrity", () => {
       expect(t.description).toBeTruthy();
       if (t.href) expect(t.href).toMatch(/^https?:\/\//);
     }
-    const upcoming = talks.filter(t => t.upcoming);
-    expect(upcoming.length).toBeGreaterThanOrEqual(1);
   });
 
   it("career roles reference a known city and have role+org", () => {

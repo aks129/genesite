@@ -9,12 +9,11 @@ export type Talk = {
 
 export const talks: Talk[] = [
   {
-    year: "Jun 2026",
-    upcoming: true,
+    year: "2026",
     title: "FHIR DevDays",
     venue: "FHIR DevDays · Amsterdam",
     description:
-      "Speaking on HIPAA-aware AI agents: what changes when agents can read and write clinical data, and what that asks of the FHIR community.",
+      "Spoke on HIPAA-aware AI agents: what changes when agents can read and write clinical data, and what that asks of the FHIR community.",
     href: "https://devdays.com",
   },
   {

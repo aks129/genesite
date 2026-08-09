@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useReducedMotion } from "framer-motion";
 import WindBackground from "./components/WindBackground";
 import LegoGene from "./components/LegoGene";
 import Nav from "./components/Nav";
@@ -10,12 +11,23 @@ import HobbiesPage from "./pages/HobbiesPage";
 import WritingPage from "./pages/WritingPage";
 import SpeakingPage from "./pages/SpeakingPage";
 import ServicesPage from "./pages/ServicesPage";
+import { startLenis, stopLenis, jumpToTop } from "./lenis";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    jumpToTop();
   }, [pathname]);
+  return null;
+}
+
+function SmoothScroll() {
+  const reduce = useReducedMotion();
+  useEffect(() => {
+    if (reduce) return;
+    startLenis();
+    return stopLenis;
+  }, [reduce]);
   return null;
 }
 
@@ -24,6 +36,7 @@ export default function App() {
     <BrowserRouter>
       <WindBackground />
       <Nav />
+      <SmoothScroll />
       <ScrollToTop />
       <main className="page">
         <Routes>
