@@ -11,7 +11,11 @@ void main() {
 `;
 
 const FRAG = `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
 precision mediump float;
+#endif
 varying vec2 v_uv;
 uniform float u_time;
 uniform vec2 u_res;
@@ -34,26 +38,69 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 5; i++) {
     v += a * noise(p);
-    p *= 2.0;
+    p *= 2.02;
     a *= 0.5;
   }
   return v;
 }
 
 void main() {
-  vec2 uv = v_uv;
-  uv.x *= u_res.x / u_res.y;
+  vec2 uv = v_uv;                      // y: 0 bottom, 1 top
+  float aspect = u_res.x / u_res.y;
+  vec2 p = vec2(uv.x * aspect, uv.y);
 
-  float t = u_time * 0.04;
-  vec2 q = vec2(fbm(uv * 1.2 + vec2(t, 0.0)), fbm(uv * 1.2 + vec2(0.0, t)));
-  float f = fbm(uv * 2.5 + q * 1.8 + vec2(t * 0.3, t * 0.5));
+  float t = u_time * 0.05;
 
-  // Drift between near-black and a faint violet wash — narrow band, no drama.
-  vec3 base = vec3(0.075, 0.071, 0.086);
-  vec3 wash = vec3(0.104, 0.092, 0.155);
-  vec3 c = mix(base, wash, smoothstep(0.25, 0.75, f));
+  // Silky aurora ribbons: horizontally stretched, double domain warp
+  vec2 q = vec2(p.x * 0.85, p.y * 2.3);
+  vec2 warp = vec2(
+    fbm(q * 1.1 + vec2(t * 0.9, -t * 0.30)),
+    fbm(q * 1.1 + vec2(5.2 - t * 0.4, 1.3 + t * 0.55))
+  );
+  float f  = fbm(q * 1.6 + 2.2 * warp + vec2(t * 0.50, -t * 0.20));
+  float f2 = fbm(q * 3.2 + 3.0 * warp.yx + vec2(-t * 0.75, t * 0.35));
+
+  // Ridge the noise into broad silky curtains instead of a fog or thin veins.
+  float ribbon  = max(1.0 - abs(f  - 0.52) * 2.2, 0.0);
+  float ribbon2 = max(1.0 - abs(f2 - 0.50) * 2.5, 0.0);
+  ribbon  = ribbon  * ribbon;
+  ribbon2 = ribbon2 * ribbon2 * ribbon2;
+
+  // Curtains drift across the upper sky and the outer thirds; the reading
+  // column stays near-black so body text keeps its contrast.
+  float sky = smoothstep(0.10, 0.72, uv.y);
+  float side = smoothstep(0.08, 0.46, abs(uv.x - 0.5));
+  float mask = sky * (0.13 + 0.87 * side) * 0.88;
+  float energy = ribbon * mask;
+
+  vec3 base   = vec3(0.075, 0.071, 0.086);  // #131216
+  vec3 indigo = vec3(0.165, 0.140, 0.360);
+  vec3 violet = vec3(0.522, 0.467, 0.953);  // #8577F3
+  vec3 ember  = vec3(0.910, 0.451, 0.290);  // #E8734A
+
+  vec3 c = base;
+  c = mix(c, indigo, clamp(energy * 1.05, 0.0, 1.0));
+  c = mix(c, violet, clamp(ribbon2 * mask * 0.55, 0.0, 1.0));
+  c = mix(c, ember,  clamp(ribbon2 * ribbon * mask * 0.20, 0.0, 1.0));
+
+  // Sparse twinkling stars, upper sky only
+  vec2 sp = uv * u_res / 3.0;
+  vec2 cell = floor(sp);
+  float h = hash(cell);
+  if (h > 0.9982) {
+    float twinkle = 0.5 + 0.5 * sin(u_time * (0.8 + hash(cell + 7.0) * 1.6) + hash(cell + 3.0) * 6.2831);
+    float dot_ = smoothstep(0.42, 0.05, length(fract(sp) - 0.5));
+    c += dot_ * twinkle * sky * 0.55 * vec3(0.85, 0.85, 1.0);
+  }
+
+  // Gentle corner falloff only — the aurora lives at the edges, so a
+  // conventional vignette would erase it.
+  float vig = smoothstep(1.05, 0.55, length((uv - 0.5) * vec2(1.0, 1.15)));
+  c *= mix(0.92, 1.0, vig);
+  c += (hash(gl_FragCoord.xy + fract(u_time)) - 0.5) / 255.0;
+
   gl_FragColor = vec4(c, 1.0);
 }
 `;

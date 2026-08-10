@@ -81,9 +81,17 @@ comes last and briefly.
 
 *   **Scroll:** Lenis smooth scroll, created only when
     `prefers-reduced-motion` is off.
-*   **Hero atmosphere:** WebGL wind shader (`WindBackground`) drifting
-    near-black → faint violet — the technical moat. Plus one soft radial halo
-    behind the hero. Falls back to a static gradient.
+*   **Living background:** WebGL aurora (`WindBackground`) — silky violet
+    curtains drifting across a near-black sky, built from double
+    domain-warped fbm ridged into bands, plus sparse twinkling stars, a soft
+    corner falloff, and a 1/255 dither to kill banding. Reference: hatom.com
+    (flowing depth, not a static gradient). Full-viewport `position: fixed`
+    so it moves under every page.
+    **Constraint:** the aurora is masked to the upper sky and outer thirds —
+    the center reading column stays near-black. Measured worst-case contrast
+    in the text column must stay ≥ 4.5:1 for body text; it is currently
+    5.5–6.8:1 (body) and 11.8–14.5:1 (headings). Re-measure if you touch the
+    mask or palette. Falls back to a layered static gradient.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
     `useReducedMotion()` — see CLAUDE.md. Lenis included.
