@@ -30,6 +30,19 @@ export default function Nav() {
             </li>
           ))}
         </ul>
+        <div className="nav-actions">
+          <a
+            className="nav-action"
+            href="https://linkedin.com/in/evestel"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn ↗
+          </a>
+          <a className="nav-action nav-action-solid" href="/Eugene-Vestel-CV.pdf" download>
+            CV ↓
+          </a>
+        </div>
       </div>
     </nav>
   );
