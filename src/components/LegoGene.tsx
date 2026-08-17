@@ -20,25 +20,31 @@ export default function LegoGene() {
   useEffect(() => {
     if (reduce) return;
     let alive = true;
+    // An awaited step can resolve after unmount (or between StrictMode's
+    // double-invoked effects); starting a new one then throws.
+    const step = (def: Parameters<typeof controls.start>[0]) =>
+      alive ? controls.start(def) : Promise.resolve();
+
     async function loop() {
       // Initial drop-in from off-screen
-      await controls.start({
+      await step({
         x: 24,
         y: 0,
         transition: { type: "spring", stiffness: 120, damping: 14, delay: 1.2 },
       });
       while (alive) {
         const target = direction === 1 ? playWidth() - 24 : 24;
-        await controls.start({
+        await step({
           x: target,
           transition: { duration: 14, ease: "linear" },
         });
         if (!alive) break;
         // Turn around — small pause, then flip facing
-        await controls.start({
+        await step({
           rotateY: direction === 1 ? 180 : 0,
           transition: { duration: 0.4 },
         });
+        if (!alive) break;
         setDirection(d => (d === 1 ? -1 : 1));
       }
     }

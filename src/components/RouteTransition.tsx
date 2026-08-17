@@ -2,9 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 
-const SLATS = 9;
-const DURATION = 0.78;
-const TOTAL_MS = 1020;
+const SLATS = 7;
+/** easeInOutQuart-ish — smooth through the middle, no snap */
+const EASE = [0.62, 0, 0.30, 1] as const;
+const COVER = 0.60;   // s, curtain falls
+const HOLD = 0.16;    // s, fully covered
+const LIFT = 0.70;    // s, curtain continues out of frame
+const STAGGER = 0.055;
+const SPAN = COVER + HOLD + LIFT;
+const TOTAL_MS = (SPAN + STAGGER * Math.ceil(SLATS / 2)) * 1000 + 140;
 
 const LABELS: Record<string, string> = {
   "/": "~/home",
@@ -17,11 +23,16 @@ const LABELS: Record<string, string> = {
   "/hobbies": "~/off-hours",
 };
 
+/** Distance from the centre slat, so the curtain opens outward from the middle. */
+function centreOut(i: number) {
+  return Math.abs(i - (SLATS - 1) / 2);
+}
+
 /**
- * Cyberpunk route wipe: vertical slats sweep down over the outgoing page and
- * retract, with a mono readout of the destination. A timer (not framer's
- * onAnimationComplete) controls unmount — the wrapper's own animation settles
- * immediately and would otherwise cut the slats off mid-sweep.
+ * Route curtain. Slats *translate* rather than scale — scaling a gradient
+ * stretches its leading edge and reads as cheap. The curtain falls from
+ * above, holds, then continues downward out of frame, so it passes through
+ * instead of rewinding.
  */
 export default function RouteTransition() {
   const { pathname } = useLocation();
@@ -54,23 +65,24 @@ export default function RouteTransition() {
         {Array.from({ length: SLATS }).map((_, i) => (
           <motion.span
             key={`${run}-${i}`}
-            initial={{ scaleY: 0 }}
-            animate={{ scaleY: [0, 1, 1, 0] }}
+            initial={{ y: "-101%" }}
+            animate={{ y: ["-101%", "0%", "0%", "101%"] }}
             transition={{
-              duration: DURATION,
-              times: [0, 0.34, 0.5, 1],
-              ease: [0.76, 0, 0.24, 1],
-              delay: i * 0.026,
+              duration: SPAN,
+              times: [0, COVER / SPAN, (COVER + HOLD) / SPAN, 1],
+              ease: [EASE, "linear", EASE],
+              delay: centreOut(i) * STAGGER,
             }}
+            style={{ willChange: "transform" }}
           />
         ))}
       </div>
       <motion.span
         className="route-wipe-label"
         key={`label-${run}`}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: [0, 1, 1, 0], y: [8, 0, 0, -8] }}
-        transition={{ duration: DURATION, times: [0, 0.35, 0.6, 1] }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: [0, 1, 1, 0], y: [10, 0, 0, -10] }}
+        transition={{ duration: SPAN * 0.85, times: [0, 0.4, 0.62, 1], ease: "easeOut" }}
       >
         <span className="route-wipe-caret">▸</span> {label}
       </motion.span>

@@ -7,6 +7,9 @@ import Nav from "./components/Nav";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import RouteTransition from "./components/RouteTransition";
+import PageShell from "./components/PageShell";
+import Cursor from "./components/Cursor";
+import ScrollProgress from "./components/ScrollProgress";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
 import CareerPage from "./pages/CareerPage";
@@ -62,7 +65,10 @@ export default function App() {
       <ScrollToTop />
       <RouteTitle />
       <RouteTransition />
+      <ScrollProgress />
+      <Cursor />
       <main className="page">
+        <PageShell>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<ProjectsPage />} />
@@ -74,6 +80,7 @@ export default function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="*" element={<Home />} />
         </Routes>
+        </PageShell>
         <Contact />
         <Footer />
       </main>

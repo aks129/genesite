@@ -115,6 +115,22 @@ comes last and briefly.
       instantly and would cut the slats off mid-sweep.
     - Display headings use a per-line clip reveal (`.hero-h .hl`), never a
       scramble — mixed serif/sans lines shift too much.
+    - A sheen sweeps once across a `.hud` panel on hover (second background
+      layer, animated via `background-position`).
+    - `useMagnetic` leans buttons toward the pointer (capped at 10px) and
+      springs them back; applied to hero CTAs, nav actions, the booking
+      button. Pair it with the `.magnetic` class for the return easing.
+    - `Cursor` draws a trailing reticle that widens over anything
+      interactive. Fine pointers only, never on touch. The native cursor
+      stays visible — the ring is an accent, not a replacement.
+    - `ScrollProgress` is a 2px violet readout of scroll position.
+*   **Route curtain timing:** slats **translate**, never scale — scaling a
+    gradient stretches its leading edge and looks cheap. Ease is a soft
+    in-out (`[0.62, 0, 0.30, 1]`); easeInOutQuint snapped through the middle
+    (95px/frame vs 42px). It falls, holds ~0.16s, then continues *downward*
+    out of frame rather than retracting, so it passes through instead of
+    rewinding. `PageShell` settles the incoming content in behind it so the
+    reveal never lands on a hard cut.
     **All of the above collapse under `prefers-reduced-motion`** via the media
     query at the end of the HUD block plus early returns in the components.
 

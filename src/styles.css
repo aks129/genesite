@@ -440,13 +440,22 @@ a:focus-visible, button:focus-visible {
 
 .hud > * { position: relative; z-index: 2; }
 
-/* Glow that tracks the pointer. Painted as a background *image* so the
-   card's own background-color underneath it is untouched. */
+/* Two stacked background *images* so the card's own background-color
+   underneath is untouched: a glow that tracks the pointer, and a light
+   sheen that sweeps across once on hover. */
 .hud {
   background-image:
-    radial-gradient(240px circle at var(--mx) var(--my), rgba(133, 119, 243, 0.16), transparent 68%);
-  background-repeat: no-repeat;
+    radial-gradient(240px circle at var(--mx) var(--my), rgba(133, 119, 243, 0.16), transparent 68%),
+    linear-gradient(100deg, transparent 42%, rgba(178, 168, 255, 0.09) 50%, transparent 58%);
+  background-repeat: no-repeat, no-repeat;
+  background-size: auto, 260% 100%;
+  background-position: 0 0, 150% 0;
 }
+@keyframes hud-sweep {
+  from { background-position: 0 0, 150% 0; }
+  to   { background-position: 0 0, -60% 0; }
+}
+.hud:hover { animation: hud-sweep 900ms cubic-bezier(0.22, 1, 0.36, 1) 1; }
 
 /* Title glitch — brief chromatic split on panel hover */
 @keyframes hud-glitch {
@@ -490,7 +499,7 @@ a:focus-visible, button:focus-visible {
 }
 .terminal-prompt { color: var(--accent); }
 
-/* Route wipe overlay */
+/* Route curtain */
 .route-wipe {
   position: fixed;
   inset: 0;
@@ -498,36 +507,91 @@ a:focus-visible, button:focus-visible {
   pointer-events: none;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 .route-wipe-slats {
   position: absolute;
   inset: 0;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(7, 1fr);
 }
 .route-wipe-slats span {
   display: block;
   height: 100%;
-  transform-origin: top;
-  background: linear-gradient(180deg, var(--accent-deep) 0%, #16141B 14%, #16141B 100%);
-  border-right: 1px solid rgba(133, 119, 243, 0.22);
+  /* Slight horizontal overlap hides sub-pixel seams between slats. */
+  margin-right: -1px;
+  background:
+    linear-gradient(180deg,
+      rgba(133, 119, 243, 0.85) 0%,
+      rgba(110, 95, 224, 0.35) 2.5%,
+      #15131A 9%,
+      #15131A 100%);
 }
 .route-wipe-label {
   position: relative;
   font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.16em;
+  font-size: 13px;
+  letter-spacing: 0.18em;
   color: var(--text);
   text-transform: uppercase;
 }
 .route-wipe-caret { color: var(--accent); margin-right: 6px; }
 
+/* Scroll progress readout */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 45;
+  pointer-events: none;
+  background: transparent;
+}
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--pop));
+  box-shadow: 0 0 12px rgba(133, 119, 243, 0.55);
+}
+
+/* HUD cursor reticle (fine pointers only) */
+.cursor { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(133, 119, 243, 0.55);
+  border-radius: 50%;
+  transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease,
+    background-color 0.22s ease, opacity 0.2s ease;
+}
+.cursor-ring.is-locked {
+  width: 46px;
+  height: 46px;
+  border-color: var(--accent);
+  background: rgba(133, 119, 243, 0.10);
+}
+/* Magnetic elements ease back when the pointer leaves */
+.magnetic { transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
+
 @media (prefers-reduced-motion: reduce) {
   .hud { background-image: none; }
   .hud::before, .hud::after { transition: none; }
+  .hud:hover { animation: none; }
   .hud:hover .glitch-target { animation: none; }
   .hero-h .hl > span { animation: none; }
-  .route-wipe { display: none; }
+  .route-wipe, .cursor { display: none; }
+  .magnetic { transition: none; }
 }
 
 /* ---- Home · two pillars ---- */

@@ -1,4 +1,5 @@
 import Reveal from "../components/Reveal";
+import { useCursorGlow } from "../hooks/useCursorGlow";
 import { services, type Service, type ServiceCategory } from "../data/services";
 
 const order: ServiceCategory[] = [
@@ -12,6 +13,8 @@ export default function ServicesPage() {
   const grouped = order
     .map(cat => ({ cat, items: services.filter(s => s.category === cat) }))
     .filter(g => g.items.length > 0);
+  // Number cards in the order they appear on the page, not source order.
+  const displayOrder = grouped.flatMap(g => g.items);
 
   return (
     <>
@@ -73,7 +76,9 @@ export default function ServicesPage() {
           <section aria-labelledby={slug(cat)}>
             <h2 id={slug(cat)}>{cat}</h2>
             <div className="project-cards">
-              {items.map(s => <ServiceCard key={s.name} service={s} />)}
+              {items.map(s => (
+                <ServiceCard key={s.name} service={s} index={displayOrder.indexOf(s) + 1} />
+              ))}
             </div>
           </section>
         </Reveal>
@@ -82,11 +87,13 @@ export default function ServicesPage() {
   );
 }
 
-function ServiceCard({ service }: { service: Service }) {
+function ServiceCard({ service, index }: { service: Service; index: number }) {
+  const glow = useCursorGlow();
   return (
-    <article className="project-card">
+    <article className="project-card hud" data-hud {...glow}>
+      <span className="hud-index">{String(index).padStart(2, "0")}</span>
       <header className="project-card-head">
-        <h3>{service.name}</h3>
+        <h3 className="glitch-target">{service.name}</h3>
       </header>
       <p className="service-tagline">{service.tagline}</p>
       <p className="project-card-body">{service.description}</p>

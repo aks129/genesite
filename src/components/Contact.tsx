@@ -1,6 +1,8 @@
 import Reveal from "./Reveal";
+import { useMagnetic } from "../hooks/useMagnetic";
 
 export default function Contact() {
+  const mag = useMagnetic();
   return (
     <Reveal>
       <section aria-labelledby="contact-h">
@@ -10,10 +12,11 @@ export default function Contact() {
         </p>
         <div className="contact-actions">
           <a
-            className="contact-book"
+            className="contact-book magnetic"
             href="https://calendar.app.google/EtMLLLeZmA42877T9"
             target="_blank"
             rel="noopener noreferrer"
+            {...mag}
           >
             Book a meeting →
           </a>

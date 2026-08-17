@@ -8,7 +8,7 @@ let instance: Lenis | null = null;
 
 export function startLenis(): void {
   if (!instance) {
-    instance = new Lenis({ autoRaf: true, lerp: 0.12 });
+    instance = new Lenis({ autoRaf: true, lerp: 0.085 });
   }
 }
 
