@@ -6,6 +6,7 @@ import LegoGene from "./components/LegoGene";
 import Nav from "./components/Nav";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import RouteTransition from "./components/RouteTransition";
 import Home from "./pages/Home";
 import ProjectsPage from "./pages/ProjectsPage";
 import CareerPage from "./pages/CareerPage";
@@ -60,6 +61,7 @@ export default function App() {
       <SmoothScroll />
       <ScrollToTop />
       <RouteTitle />
+      <RouteTransition />
       <main className="page">
         <Routes>
           <Route path="/" element={<Home />} />

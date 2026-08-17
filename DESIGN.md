@@ -97,6 +97,26 @@ comes last and briefly.
     `useReducedMotion()` — see CLAUDE.md. Lenis included.
 *   **Hover:** every interactive element has a defined hover state (color,
     underline thickness, or lift). Transitions 150–200ms ease.
+*   **HUD interaction layer** (reference: adrian-vlasov-portfolio — terminal /
+    heads-up-display feel, adapted to violet rather than its neon green):
+    - `.hud` panels (project cards, pillars) get corner brackets that snap in
+      on hover/focus-within, a pointer-tracking glow (`--mx`/`--my` written by
+      `useCursorGlow`, painted as a background *image* so the panel's own
+      background-color survives), and a mono `hud-index` that lights violet.
+    - `ScrambleText` decodes text on mount or on hover of the nearest
+      `[data-hud]`. It keeps an invisible copy of the real string to hold the
+      width (proportional fonts would otherwise shift the page) plus a
+      `visually-hidden` copy for assistive tech; the animated spans are
+      `aria-hidden`.
+    - `.glitch-target` inside a hovered `.hud` plays one short chromatic split.
+    - `RouteTransition` wipes vertical slats over route changes with a mono
+      readout of the destination. Unmount is driven by a **timer**, not
+      framer's `onAnimationComplete` — the wrapper's own animation settles
+      instantly and would cut the slats off mid-sweep.
+    - Display headings use a per-line clip reveal (`.hero-h .hl`), never a
+      scramble — mixed serif/sans lines shift too much.
+    **All of the above collapse under `prefers-reduced-motion`** via the media
+    query at the end of the HUD block plus early returns in the components.
 
 ## 7. Iconography & Assets
 

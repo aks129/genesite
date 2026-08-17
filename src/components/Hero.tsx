@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
+import ScrambleText from "./ScrambleText";
 
 export default function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-h">
       <div className="hero-text">
-        <div className="dateline">Pittsburgh, Pennsylvania</div>
-        <h1 id="hero-h">
-          Build things.
-          <br />
-          Make them <em>better.</em>
-          <br />
-          Help people solve <em>real problems.</em>
+        <div className="dateline">
+          <ScrambleText text="pittsburgh, pennsylvania" speed={20} />
+        </div>
+        <h1 id="hero-h" className="hero-h">
+          <span className="hl"><span>Build things.</span></span>
+          <span className="hl"><span>Make them <em>better.</em></span></span>
+          <span className="hl"><span>Help people solve <em>real problems.</em></span></span>
         </h1>
         <p className="hero-id">
           Gene Vestel — host of <em>Out of the FHIR</em>, author of{" "}
@@ -23,19 +24,21 @@ export default function Hero() {
             href="https://open.spotify.com/show/6GBZT7KA1Ug8xMZ4l5LThU"
             target="_blank"
             rel="noopener noreferrer"
+            data-hud
           >
-            Listen to the podcast
+            <ScrambleText text="Listen to the podcast" trigger="hover" speed={22} />
           </a>
           <a
             className="hero-cta"
             href="https://evestel.substack.com/subscribe"
             target="_blank"
             rel="noopener noreferrer"
+            data-hud
           >
-            Subscribe to the newsletter
+            <ScrambleText text="Subscribe to the newsletter" trigger="hover" speed={22} />
           </a>
-          <Link className="hero-cta hero-cta-quiet" to="/expertise">
-            Work with me →
+          <Link className="hero-cta hero-cta-quiet" to="/expertise" data-hud>
+            <ScrambleText text="Work with me →" trigger="hover" speed={22} />
           </Link>
         </div>
       </div>

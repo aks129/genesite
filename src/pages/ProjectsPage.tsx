@@ -1,4 +1,6 @@
 import Reveal from "../components/Reveal";
+import ScrambleText from "../components/ScrambleText";
+import { useCursorGlow } from "../hooks/useCursorGlow";
 import { projects, type Project } from "../data/projects";
 
 export default function ProjectsPage() {
@@ -13,6 +15,10 @@ export default function ProjectsPage() {
             tooling for letting agents work with health records without
             anyone getting hurt.
           </p>
+          <p className="terminal-line">
+            <span className="terminal-prompt">$</span>{" "}
+            <ScrambleText text={`ls ~/projects — ${projects.length} tracked`} speed={18} />
+          </p>
         </header>
       </Reveal>
 
@@ -20,7 +26,9 @@ export default function ProjectsPage() {
         <section aria-labelledby="proj-grid">
           <h2 id="proj-grid" className="visually-hidden">Projects</h2>
           <div className="project-cards">
-            {projects.map(p => <ProjectCard key={p.name} project={p} />)}
+            {projects.map((p, i) => (
+              <ProjectCard key={p.name} project={p} index={i} />
+            ))}
           </div>
         </section>
       </Reveal>
@@ -44,11 +52,13 @@ export default function ProjectsPage() {
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const glow = useCursorGlow();
   return (
-    <article className="project-card">
+    <article className="project-card hud" data-hud {...glow}>
+      <span className="hud-index">{String(index + 1).padStart(2, "0")}</span>
       <header className="project-card-head">
-        <h3>
+        <h3 className="glitch-target">
           {project.href ? (
             <a href={project.href} target="_blank" rel="noopener noreferrer">
               {project.name} <span aria-hidden="true">↗</span>
