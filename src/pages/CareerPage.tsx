@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Reveal from "../components/Reveal";
 import USMap from "../components/USMap";
+import Parallax from "../components/Parallax";
 import CareerChart from "../components/CareerChart";
 import { career, type City } from "../data/career";
 import { expertise, tenureYears, tenureContext } from "../data/expertise";
@@ -27,7 +28,9 @@ export default function CareerPage() {
       </Reveal>
 
       <Reveal>
-        <USMap activeCity={activeCity} onCityHover={setActiveCity} />
+        <Parallax distance={22}>
+          <USMap activeCity={activeCity} onCityHover={setActiveCity} />
+        </Parallax>
       </Reveal>
 
       <Reveal>

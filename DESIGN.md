@@ -5,7 +5,7 @@ UI follows this file. When code and this file disagree, fix one of them — neve
 let them drift.
 
 Aesthetic direction: **dark editorial, mission-first** (references:
-animaapp.com for surface — near-black canvas, violet accent, hairline borders,
+animaapp.com for surface — deep forest canvas, orange accent, hairline borders,
 soft card glow, film grain; whoisjoa.studio for structure — mission statement
 before name, mixed-type headlines with italic-serif emphasis, underscore mono
 eyebrows, few words, huge calm space).
@@ -41,26 +41,34 @@ comes last and briefly.
 
 ## 3. Color Palette
 
+Forest green + vibrant orange (Merlin Studio direction). `#324434` is the
+specified forest; `--bg` sits darker than it so body text keeps its contrast,
+with the forest used for raised surfaces and fills.
+
 | Token | Hex | Use |
 |---|---|---|
-| `--bg` | `#131216` | page background (near-black, warm-violet cast) |
-| `--bg-raised` | `#1B1A21` | cards, panels |
-| `--text` | `#F2F0EC` | headings, primary text (warm white) |
-| `--text-soft` | `#A8A4B0` | body/secondary text |
-| `--text-faint` | `#6E6A7A` | tertiary text, captions, ticks |
-| `--rule` | `#2B2933` | hairlines, borders |
-| `--accent` | `#8577F3` | violet — links, active states, section numbers |
-| `--accent-deep` | `#6E5FE0` | button fills, hover darken |
-| `--accent-wash` | `rgba(133,119,243,0.14)` | selection, subtle fills |
-| `--pop` | `#E8734A` | rare ember accent — "Upcoming" tag, one per screen |
+| `--bg` | `#141B15` | page background (deep forest black) |
+| `--bg-raised` | `#1C261D` | cards, panels |
+| `--forest` | `#324434` | the specified green — fills, banners |
+| `--text` | `#F3F0E6` | headings, primary text (warm cream) |
+| `--text-soft` | `#B3BCAD` | body/secondary text |
+| `--text-faint` | `#7E8A7C` | tertiary text, captions, ticks |
+| `--rule` | `#2E3B2F` | hairlines, borders |
+| `--accent` | `#FFA61E` | vibrant orange — links, active states, section numbers |
+| `--accent-deep` | `#E08A0C` | button fills, hover darken |
+| `--accent-wash` | `rgba(255,166,30,0.14)` | selection, subtle fills |
+| `--pop` | `#FFD37A` | rare light-amber highlight |
 
-*   **Banned:** purple *gradients* (flat violet fills only), neon glows beyond
-    the soft card halo, pure #FFF backgrounds, hospital blue.
+*   **Banned:** purple/violet anything (superseded), neon glows beyond the soft
+    card halo, pure #FFF backgrounds, hospital blue.
+*   **Measured contrast** on this palette (worst-case background in the reading
+    column): body 5.9-7.7:1, headings 10.2-13.3:1, orange accent 6.0-7.7:1 —
+    all past WCAG AA. Re-measure after any palette or shader change.
 
 ## 4. Spacing & Layout
 
 *   680px reading measure, gutters `clamp(24px, 5vw, 48px)`.
-*   Section rhythm: hairline rule + violet mono section number + Fraunces
+*   Section rhythm: hairline rule + orange mono section number + Fraunces
     heading (CSS counters — no markup changes needed).
 *   Breakout elements (map, chart) exceed the measure symmetrically
     (`margin-inline: -120px`, collapsing at 1024/800px).
@@ -69,9 +77,9 @@ comes last and briefly.
 ## 5. UI Components & Elements
 
 *   **Buttons:** `--accent-deep` fill, white text, radius 8px. Hover:
-    `--accent` + translateY(-1px) + violet shadow, 180ms ease.
+    `--accent` + translateY(-1px) + warm shadow, 180ms ease.
 *   **Cards:** `--bg-raised`, 1px `--rule` border, radius 12px. Hover: border →
-    violet, translateY(-3px), deep shadow + faint violet halo.
+    orange, translateY(-3px), deep shadow + faint warm halo.
 *   **Borders:** 1px hairlines in `--rule`; radius is 8px (controls) or 12px
     (cards/panels) — nothing else.
 *   **Tags/pills:** mono, 1px border, radius 999px.
@@ -81,8 +89,8 @@ comes last and briefly.
 
 *   **Scroll:** Lenis smooth scroll, created only when
     `prefers-reduced-motion` is off.
-*   **Living background:** WebGL aurora (`WindBackground`) — silky violet
-    curtains drifting across a near-black sky, built from double
+*   **Living background:** WebGL aurora (`WindBackground`) — silky forest-green
+    curtains with a thin warm rim, drifting across a deep green-black sky, built from double
     domain-warped fbm ridged into bands, plus sparse twinkling stars, a soft
     corner falloff, and a 1/255 dither to kill banding. Reference: hatom.com
     (flowing depth, not a static gradient). Full-viewport `position: fixed`
@@ -90,7 +98,7 @@ comes last and briefly.
     **Constraint:** the aurora is masked to the upper sky and outer thirds —
     the center reading column stays near-black. Measured worst-case contrast
     in the text column must stay ≥ 4.5:1 for body text; it is currently
-    5.5–6.8:1 (body) and 11.8–14.5:1 (headings). Re-measure if you touch the
+    5.9–7.7:1 (body) and 10.2–13.3:1 (headings). Re-measure if you touch the
     mask or palette. Falls back to a layered static gradient.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
@@ -98,11 +106,11 @@ comes last and briefly.
 *   **Hover:** every interactive element has a defined hover state (color,
     underline thickness, or lift). Transitions 150–200ms ease.
 *   **HUD interaction layer** (reference: adrian-vlasov-portfolio — terminal /
-    heads-up-display feel, adapted to violet rather than its neon green):
+    heads-up-display feel, adapted to the orange accent):
     - `.hud` panels (project cards, pillars) get corner brackets that snap in
       on hover/focus-within, a pointer-tracking glow (`--mx`/`--my` written by
       `useCursorGlow`, painted as a background *image* so the panel's own
-      background-color survives), and a mono `hud-index` that lights violet.
+      background-color survives), and a mono `hud-index` that lights orange.
     - `ScrambleText` decodes text on mount or on hover of the nearest
       `[data-hud]`. It keeps an invisible copy of the real string to hold the
       width (proportional fonts would otherwise shift the page) plus a
@@ -123,7 +131,10 @@ comes last and briefly.
     - `Cursor` draws a trailing reticle that widens over anything
       interactive. Fine pointers only, never on touch. The native cursor
       stays visible — the ring is an accent, not a replacement.
-    - `ScrollProgress` is a 2px violet readout of scroll position.
+    - `ScrollProgress` is a 2px orange readout of scroll position.
+    - `Parallax` drifts breakout visuals against page scroll for depth.
+    - The contact block is a HUD panel with a pulsing status dot and
+      staggered entrance.
 *   **Route curtain timing:** slats **translate**, never scale — scaling a
     gradient stretches its leading edge and looks cheap. Ease is a soft
     in-out (`[0.62, 0, 0.30, 1]`); easeInOutQuint snapped through the middle

@@ -1,21 +1,25 @@
 /* ============================================================
    eugenevestel.com — design tokens
-   Source of truth: DESIGN.md. Dark editorial, Anima-inspired:
-   near-black canvas, high-contrast white serif display, muted
-   sans body, violet accent, thin hairlines, soft card glow.
+   Source of truth: DESIGN.md. Dark editorial, Merlin-Studio
+   direction: deep forest-green canvas, warm cream display serif,
+   muted sans body, vibrant orange accent, hairlines, soft glow.
    ============================================================ */
 
 :root {
-  --bg:         #131216;
-  --bg-raised:  #1B1A21;
-  --text:       #F2F0EC;
-  --text-soft:  #A8A4B0;
-  --text-faint: #6E6A7A;
-  --rule:       #2B2933;
-  --accent:      #8577F3;
-  --accent-deep: #6E5FE0;
-  --accent-wash: rgba(133, 119, 243, 0.14);
-  --pop:         #E8734A;
+  /* Forest green + vibrant orange (Merlin Studio direction).
+     --forest is the specified #324434; --bg sits darker so body text keeps
+     its contrast, with --forest used for raised surfaces and fills. */
+  --bg:         #141B15;
+  --bg-raised:  #1C261D;
+  --forest:     #324434;
+  --text:       #F3F0E6;
+  --text-soft:  #B3BCAD;
+  --text-faint: #7E8A7C;
+  --rule:       #2E3B2F;
+  --accent:      #FFA61E;
+  --accent-deep: #E08A0C;
+  --accent-wash: rgba(255, 166, 30, 0.14);
+  --pop:         #FFD37A;
 
   --display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --body:    "Instrument Sans Variable", "Helvetica Neue", Helvetica, sans-serif;
@@ -85,7 +89,7 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(19, 18, 22, 0.78);
+  background: rgba(20, 27, 21, 0.80);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
   backdrop-filter: saturate(140%) blur(14px);
   border-bottom: 1px solid var(--rule);
@@ -219,7 +223,7 @@ h2 {
 a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: rgba(133, 119, 243, 0.5);
+  text-decoration-color: rgba(255, 166, 30, 0.5);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease, color 0.15s ease;
@@ -280,9 +284,9 @@ a:focus-visible, button:focus-visible {
 .wind-bg canvas { display: block; width: 100%; height: 100%; }
 .wind-bg.fallback {
   background:
-    radial-gradient(ellipse 85% 55% at 50% -12%, rgba(133, 119, 243, 0.20), transparent 62%),
-    radial-gradient(ellipse 45% 35% at 88% 6%, rgba(232, 115, 74, 0.05), transparent 70%),
-    linear-gradient(180deg, #18151F 0%, #131216 55%, #131216 100%);
+    radial-gradient(ellipse 85% 55% at 50% -12%, rgba(255, 166, 30, 0.20), transparent 62%),
+    radial-gradient(ellipse 45% 35% at 88% 6%, rgba(255, 211, 122, 0.05), transparent 70%),
+    linear-gradient(180deg, #1A231B 0%, #141B15 55%, #141B15 100%);
 }
 
 /* ---- Hero: centered mission statement, mixed-type headline ---- */
@@ -305,7 +309,7 @@ a:focus-visible, button:focus-visible {
   inset: -120px -200px auto;
   height: 480px;
   pointer-events: none;
-  background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(133, 119, 243, 0.13), transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 20%, rgba(255, 166, 30, 0.13), transparent 70%);
 }
 
 .hero-text { width: 100%; position: relative; margin-inline: -120px; }
@@ -351,7 +355,7 @@ a:focus-visible, button:focus-visible {
   color: var(--text);
   text-decoration: none;
   padding: 8px 16px;
-  border: 1px solid rgba(133, 119, 243, 0.55);
+  border: 1px solid rgba(255, 166, 30, 0.55);
   border-radius: 999px;
   transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
 }
@@ -445,8 +449,8 @@ a:focus-visible, button:focus-visible {
    sheen that sweeps across once on hover. */
 .hud {
   background-image:
-    radial-gradient(240px circle at var(--mx) var(--my), rgba(133, 119, 243, 0.16), transparent 68%),
-    linear-gradient(100deg, transparent 42%, rgba(178, 168, 255, 0.09) 50%, transparent 58%);
+    radial-gradient(240px circle at var(--mx) var(--my), rgba(255, 166, 30, 0.16), transparent 68%),
+    linear-gradient(100deg, transparent 42%, rgba(255, 214, 150, 0.09) 50%, transparent 58%);
   background-repeat: no-repeat, no-repeat;
   background-size: auto, 260% 100%;
   background-position: 0 0, 150% 0;
@@ -494,7 +498,7 @@ a:focus-visible, button:focus-visible {
   padding: 9px 14px;
   border: 1px solid var(--rule);
   border-radius: var(--radius-s);
-  background: rgba(133, 119, 243, 0.04);
+  background: rgba(255, 166, 30, 0.04);
   display: inline-block;
 }
 .terminal-prompt { color: var(--accent); }
@@ -522,10 +526,10 @@ a:focus-visible, button:focus-visible {
   margin-right: -1px;
   background:
     linear-gradient(180deg,
-      rgba(133, 119, 243, 0.85) 0%,
-      rgba(110, 95, 224, 0.35) 2.5%,
-      #15131A 9%,
-      #15131A 100%);
+      rgba(255, 166, 30, 0.85) 0%,
+      rgba(224, 138, 12, 0.35) 2.5%,
+      #161E17 9%,
+      #161E17 100%);
 }
 .route-wipe-label {
   position: relative;
@@ -554,7 +558,7 @@ a:focus-visible, button:focus-visible {
   transform: scaleX(0);
   transform-origin: 0 50%;
   background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--pop));
-  box-shadow: 0 0 12px rgba(133, 119, 243, 0.55);
+  box-shadow: 0 0 12px rgba(255, 166, 30, 0.55);
 }
 
 /* HUD cursor reticle (fine pointers only) */
@@ -570,7 +574,7 @@ a:focus-visible, button:focus-visible {
 .cursor-ring {
   width: 30px;
   height: 30px;
-  border: 1px solid rgba(133, 119, 243, 0.55);
+  border: 1px solid rgba(255, 166, 30, 0.55);
   border-radius: 50%;
   transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease,
     background-color 0.22s ease, opacity 0.2s ease;
@@ -579,7 +583,7 @@ a:focus-visible, button:focus-visible {
   width: 46px;
   height: 46px;
   border-color: var(--accent);
-  background: rgba(133, 119, 243, 0.10);
+  background: rgba(255, 166, 30, 0.10);
 }
 /* Magnetic elements ease back when the pointer leaves */
 .magnetic { transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
@@ -612,9 +616,9 @@ a:focus-visible, button:focus-visible {
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .pillar:hover {
-  border-color: rgba(133, 119, 243, 0.65);
+  border-color: rgba(255, 166, 30, 0.65);
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(133, 119, 243, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 166, 30, 0.12);
 }
 .pillar h3 {
   font-family: var(--display);
@@ -726,6 +730,41 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ---- Contact ---- */
+.contact-panel {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-m);
+  background-color: var(--bg-raised);
+  padding: 28px 30px 30px;
+  margin: 0.6em 0 0;
+}
+.contact-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+.contact-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(255, 166, 30, 0.55);
+  animation: contact-pulse 2.4s ease-out infinite;
+}
+@keyframes contact-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 166, 30, 0.5); }
+  70%  { box-shadow: 0 0 0 9px rgba(255, 166, 30, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 166, 30, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-dot { animation: none; }
+}
+
 .contact-intro {
   color: var(--text-soft);
   font-size: 16px;
@@ -771,7 +810,7 @@ a:focus-visible, button:focus-visible {
   border-color: var(--accent);
   color: #FFFFFF;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(133, 119, 243, 0.35);
+  box-shadow: 0 8px 24px rgba(255, 166, 30, 0.35);
 }
 .contact-book:active { transform: translateY(0); box-shadow: none; }
 
@@ -809,9 +848,9 @@ a:focus-visible, button:focus-visible {
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .project-card:hover {
-  border-color: rgba(133, 119, 243, 0.65);
+  border-color: rgba(255, 166, 30, 0.65);
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(133, 119, 243, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(255, 166, 30, 0.12);
 }
 .project-card-head {
   display: flex;
@@ -1031,7 +1070,7 @@ a:focus-visible, button:focus-visible {
   font-family: var(--mono);
   font-size: 13px;
   padding: 6px 14px;
-  border: 1px solid rgba(133, 119, 243, 0.55);
+  border: 1px solid rgba(255, 166, 30, 0.55);
   border-radius: 999px;
   color: var(--text);
   text-decoration: none;
@@ -1048,12 +1087,12 @@ a:focus-visible, button:focus-visible {
 /* ---- /speaking page ---- */
 .upcoming-block {
   background: var(--bg-raised);
-  border: 1px solid rgba(133, 119, 243, 0.5);
+  border: 1px solid rgba(255, 166, 30, 0.5);
   color: var(--text);
   padding: 26px 30px;
   margin: 1.4em 0 2.4em;
   border-radius: var(--radius-m);
-  box-shadow: 0 0 40px rgba(133, 119, 243, 0.10);
+  box-shadow: 0 0 40px rgba(255, 166, 30, 0.10);
 }
 .upcoming-block h2 {
   border-top: none;
@@ -1110,7 +1149,7 @@ a:focus-visible, button:focus-visible {
 }
 .talk-body h3 a { text-decoration: none; border-bottom: 1px solid var(--rule); }
 .talk-body h3 a:hover { border-bottom-color: currentColor; }
-.upcoming-block .talk-body h3 a { border-bottom-color: rgba(133, 119, 243, 0.5); }
+.upcoming-block .talk-body h3 a { border-bottom-color: rgba(255, 166, 30, 0.5); }
 .talk-venue {
   color: var(--text-soft);
   font-size: 15px;
@@ -1343,7 +1382,7 @@ a:focus-visible, button:focus-visible {
   font-size: 12px;
   color: var(--text);
   padding: 3px 10px;
-  border: 1px solid rgba(133, 119, 243, 0.55);
+  border: 1px solid rgba(255, 166, 30, 0.55);
   border-radius: 999px;
   letter-spacing: 0.01em;
 }

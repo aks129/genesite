@@ -75,15 +75,17 @@ void main() {
   float mask = sky * (0.13 + 0.87 * side) * 0.88;
   float energy = ribbon * mask;
 
-  vec3 base   = vec3(0.075, 0.071, 0.086);  // #131216
-  vec3 indigo = vec3(0.165, 0.140, 0.360);
-  vec3 violet = vec3(0.522, 0.467, 0.953);  // #8577F3
-  vec3 ember  = vec3(0.910, 0.451, 0.290);  // #E8734A
+  vec3 base   = vec3(0.078, 0.106, 0.082);  // #141B15
+  vec3 forest = vec3(0.196, 0.267, 0.204);  // #324434
+  vec3 sage   = vec3(0.365, 0.478, 0.365);
+  vec3 amber  = vec3(1.000, 0.651, 0.118);  // #FFA61E
 
   vec3 c = base;
-  c = mix(c, indigo, clamp(energy * 1.05, 0.0, 1.0));
-  c = mix(c, violet, clamp(ribbon2 * mask * 0.55, 0.0, 1.0));
-  c = mix(c, ember,  clamp(ribbon2 * ribbon * mask * 0.20, 0.0, 1.0));
+  c = mix(c, forest, clamp(energy * 1.15, 0.0, 1.0));
+  c = mix(c, sage,   clamp(ribbon2 * mask * 0.50, 0.0, 1.0));
+  // A thin warm rim only where both ribbon layers peak — the orange reads as
+  // light catching an edge, never as a wash.
+  c = mix(c, amber,  clamp(ribbon2 * ribbon * mask * 0.26, 0.0, 1.0));
 
   // Sparse twinkling stars, upper sky only
   vec2 sp = uv * u_res / 3.0;
