@@ -32,3 +32,9 @@ claude-*.tmp
 
 # GCP/GitHub Actions service-account creds written by google-github-actions/auth
 gha-creds-*.json
+
+# local review copy of the fly-through (derivative, not committed)
+scroll-world-preview.mp4
+
+# playwright-mcp scratch output
+.playwright-mcp/

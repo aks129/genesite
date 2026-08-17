@@ -100,6 +100,30 @@ with the forest used for raised surfaces and fills.
     in the text column must stay ≥ 4.5:1 for body text; it is currently
     5.9–7.7:1 (body) and 10.2–13.3:1 (headings). Re-measure if you touch the
     mask or palette. Falls back to a layered static gradient.
+*   **ScrollWorld hero** (`/` only): three frame-locked clips of one continuous
+    camera move — down a boardwalk, through open glass, out to a misty valley —
+    scrubbed by scroll position rather than played. A sticky full-bleed stage
+    inside a tall container; the page continues normally underneath.
+    - **Desktop + motion only.** Gated on `useReducedMotion()` and
+      `(min-width: 861px) and (pointer: fine)`. Anything else renders the
+      original `<Hero />` and downloads **zero video**. Keep `Hero.tsx` — it is
+      the live fallback, not dead code.
+    - Clips are fetched as **Blobs** (seeking never depends on HTTP range),
+      seeks are **coalesced** (never queued while the decoder is mid-seek), the
+      target is **lerped** at 0.18 so a flick reads as a glide, and the poster
+      holds until a real frame paints.
+    - The engine shipped by the `scroll-world` skill is **not** used directly:
+      seven of its layers are `position: fixed; inset: 0`, which pins an opaque
+      stage over the rest of the page. `ScrollWorld.tsx` is a scoped equivalent
+      that keeps the skill's playback techniques.
+    - The left scrim carries the copy, so its opacity **tracks copy opacity**
+      (`--sw-scrim`) — a dark band over footage with no text in it looks like a
+      mistake.
+    - Measured worst-case contrast against the **brightest single background
+      pixel** under each text block, before the text-shadow: hero h1 6.2:1,
+      identity line 14.4:1, mid line 8.0:1, valley line 11.2:1. Re-measure if
+      you touch the scrim stops, copy width, or swap footage.
+    - Source assets and prompts: `docs/scroll-world/`.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
     `useReducedMotion()` — see CLAUDE.md. Lenis included.

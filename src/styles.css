@@ -1516,3 +1516,165 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 540px) {
   .role-detail { grid-template-columns: 1fr; gap: 8px; }
 }
+
+/* ==========================================================================
+   ScrollWorld — scroll-scrubbed fly-through hero (desktop + motion only)
+   Full-bleed sticky stage inside a tall container. Three frame-locked clips
+   crossfade at the seams; scroll drives currentTime. See ScrollWorld.tsx.
+   ========================================================================== */
+.sw {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  /* Cancel .page's top padding so the film starts flush under the sticky nav. */
+  margin-top: calc(-1 * clamp(32px, 7vw, 88px));
+  margin-bottom: 3.2em;
+}
+.sw-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg);
+}
+.sw-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  overflow: hidden;
+  will-change: opacity;
+}
+.sw-scene__video,
+.sw-scene__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+.sw-scene__video { z-index: 1; }
+.sw-scene.has-clip .sw-scene__still { opacity: 0; }
+
+/* Legibility scrim. The valley leg is bright mist on the right, so the copy
+   column keeps its own gradient rather than relying on the footage. */
+.sw-copylayer { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.sw-copylayer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: min(64vw, 900px);
+  opacity: var(--sw-scrim, 1);
+  background: linear-gradient(
+    90deg,
+    var(--bg) 0%,
+    rgba(20, 27, 21, 0.94) 42%,
+    rgba(20, 27, 21, 0.66) 72%,
+    transparent 100%
+  );
+}
+.sw-copylayer::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 30%;
+  background: linear-gradient(0deg, rgba(20, 27, 21, 0.72), transparent);
+}
+
+.sw-copy {
+  position: absolute;
+  left: clamp(24px, 5vw, 76px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(46vw, 580px);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+.sw-copy .dateline { margin-bottom: 20px; }
+.sw-copy h1 {
+  font-family: var(--body);
+  font-weight: 620;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.024em;
+  margin: 0;
+}
+.sw-copy h1 em {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 460;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.sw-copy .hero-id { margin-top: 18px; max-width: 34ch; }
+.sw-copy .hero-ctas { justify-content: flex-start; }
+/* Footage moves under the text; the shadow keeps small copy legible even where
+   the scrim has thinned out. Measured worst case with this on: see DESIGN.md. */
+.sw-copy h1,
+.sw-copy .hero-id,
+.sw-copy__line { text-shadow: 0 1px 14px rgba(20, 27, 21, 0.92); }
+
+.sw-copy__eyebrow {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.sw-copy__eyebrow::before { content: "_"; }
+.sw-copy__line {
+  margin: 14px 0 0;
+  font-family: var(--display);
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 22ch;
+}
+
+.sw-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  z-index: 6;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  opacity: calc(1 - var(--sw-p, 0) * 6);
+  pointer-events: none;
+}
+.sw-hint i {
+  width: 20px;
+  height: 32px;
+  border-radius: 11px;
+  border: 1.5px solid var(--rule);
+  position: relative;
+}
+.sw-hint i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: translateX(-50%);
+  animation: sw-wheel 1.7s ease-in-out infinite;
+}
+@keyframes sw-wheel {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50%      { transform: translateX(-50%) translateY(9px); opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-hint i::after { animation: none; }
+}
