@@ -2,12 +2,14 @@ import Reveal from "../components/Reveal";
 import ScrambleText from "../components/ScrambleText";
 import { useCursorGlow } from "../hooks/useCursorGlow";
 import { projects, type Project } from "../data/projects";
+import Waypoint from "../components/Waypoint";
 
 export default function ProjectsPage() {
   return (
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Technical · Projects</div>
           <h1>What I'm building.</h1>
           <p className="lede">

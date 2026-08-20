@@ -540,6 +540,20 @@ a:focus-visible, button:focus-visible {
   text-transform: uppercase;
 }
 .route-wipe-caret { color: var(--accent); margin-right: 6px; }
+/* Travelling through the house: there are no slats to sit on, and the middle of
+   the screen is where the incoming heading lands. The readout drops to the
+   corner and reads as instrumentation over the moving footage. */
+.route-wipe.is-travel { place-items: end start; }
+.route-wipe.is-travel .route-wipe-label {
+  margin: 0 0 26px clamp(24px, 5vw, 76px);
+  font-size: 12px;
+  padding: 7px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: rgba(20, 27, 21, 0.78);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
 
 /* Scroll progress readout */
 .scroll-progress {
@@ -1677,4 +1691,159 @@ a:focus-visible, button:focus-visible {
 
 @media (prefers-reduced-motion: reduce) {
   .sw-hint i::after { animation: none; }
+}
+
+/* ================================================================
+   The world — one house behind every tab
+
+   `/` is the flight itself (see .sw above). Every other route parks the
+   same camera somewhere along the same take, so moving between tabs is a
+   move through one building rather than a set of themed pages.
+
+   Readability contract (measured, see DESIGN.md): nothing carrying body
+   copy is ever lighter than the equivalent of a 0.93 flat veil over the
+   brightest 8px block of the footage.
+   ================================================================ */
+.world {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+  --w-open: 1;
+}
+/* The aurora is fully occluded while the world is up — no reason to composite
+   both. It stays mounted so navigation never churns a WebGL context. */
+body.world-on .wind-bg { display: none; }
+
+.world-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 340ms ease;
+  will-change: opacity;
+}
+.world-scene__still,
+.world-scene__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+.world-scene__video { z-index: 1; }
+.world-scene.has-clip .world-scene__still { opacity: 0; }
+
+/* Flat dim: 0.20 on arrival so the room is genuinely present, 0.93 once the
+   visitor has scrolled into the copy. Kept deliberately light — the column mask
+   below buys the contrast, and it only spends it where the words are, which is
+   why the flat layer can afford to be this thin. */
+.world-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: var(--bg);
+  opacity: calc(0.93 - 0.73 * var(--w-open));
+}
+/* Lower-screen settle. Only present while the arrival state is open, so
+   whatever sits below the page head is already on near-solid ground before
+   the visitor scrolls a pixel. */
+.world-settle {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: var(--w-open);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 22%,
+    rgba(20, 27, 21, 0.60) 42%,
+    rgba(20, 27, 21, 0.88) 58%,
+    rgba(20, 27, 21, 0.94) 74%,
+    rgba(20, 27, 21, 0.95) 100%
+  );
+}
+/* Column mask, the same idea the aurora uses: hold the middle 680px down so
+   body copy always has ground, and leave the outer thirds bright so the forest
+   and the lit glass are still doing the work at the edges of the frame. */
+.world-column {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: var(--w-open);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(20, 27, 21, 0.30) 14%,
+    rgba(20, 27, 21, 0.72) 30%,
+    rgba(20, 27, 21, 0.80) 50%,
+    rgba(20, 27, 21, 0.72) 70%,
+    rgba(20, 27, 21, 0.30) 86%,
+    transparent 100%
+  );
+}
+/* Strip under the sticky nav so the bar keeps an edge, plus a soft vignette. */
+.world-edge {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  background:
+    linear-gradient(180deg, rgba(20, 27, 21, 0.58) 0%, transparent 13%),
+    radial-gradient(ellipse 78% 64% at 50% 42%, transparent 38%, rgba(20, 27, 21, 0.46) 100%);
+}
+
+/* The page head sits in the bright arrival band, so it carries its own pool of
+   shadow — the same trick the hero copy uses, shaped for a centred column. */
+body.world-on .page-head { position: relative; }
+body.world-on .page-head::before {
+  content: "";
+  position: absolute;
+  inset: -56px -46vw -40px;
+  z-index: -1;
+  background: radial-gradient(
+    ellipse 42% 76% at 50% 50%,
+    rgba(20, 27, 21, 0.94) 0%,
+    rgba(20, 27, 21, 0.90) 44%,
+    rgba(20, 27, 21, 0.52) 74%,
+    rgba(20, 27, 21, 0) 100%
+  );
+}
+body.world-on .page-head h1,
+body.world-on .page-head .lede {
+  text-shadow: 0 1px 14px rgba(20, 27, 21, 0.92);
+}
+
+/* ---- Waypoint: where in the house this tab is ---- */
+.waypoint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.waypoint-caret { opacity: 0.8; }
+.waypoint-map {
+  position: relative;
+  flex: 0 0 auto;
+  width: 88px;
+  height: 1px;
+  background: var(--rule);
+}
+.waypoint-map::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: var(--u, 0%);
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 166, 30, 0.18);
 }

@@ -179,3 +179,71 @@ See DESIGN.md for the contract and the measured contrast figures.
 5. Wire `references/scrub-engine.js` into the home hero; theme with
    `--sw-bg`/`--sw-ink`/`--sw-accent` to match the forest/orange tokens.
 6. QA seams per Step 8 — judge by composition, not raw PSNR.
+
+## BUILT — 2026-08-19: the world across every tab
+
+The ask: make the other tabs flow into the same nature-and-house aesthetic, so
+navigating the site feels like moving through one place ("my wheel house").
+
+**Cost: 0 credits.** Balance was **7.5** — a still is 7, a video leg 15–20, so
+generating new rooms was never on the table. It turned out not to matter: the
+three existing clips are one unbroken 20.1s camera flight through a single
+building, which is exactly the material a connected world needs. Every tab is a
+different frame of that same take, cut with ffmpeg.
+
+### The map
+
+| Route | Place | Frame | u |
+|---|---|---|---|
+| `/` | the flight itself | scrubbed 0 → 1 | — |
+| `/career` | the boardwalk | approach @ 1.6s | 0.080 |
+| `/expertise`, `/services` | the threshold | approach @ 6.6s | 0.328 |
+| `/writing` | the reading corner | inside @ 3.2s | 0.559 |
+| `/projects` | the worktable | inside @ 4.6s | 0.628 |
+| `/speaking` | the screen wall | valley @ 1.4s | 0.769 |
+| `/hobbies` | the overlook | valley @ 4.6s | 0.958 |
+
+Waypoints were picked off a contact sheet of 24 frames, chosen so each room is
+visibly distinct *and* semantically right — the bookshelf frame is the writing
+page, the worktable is projects, the valley is off-hours.
+
+### What shipped
+
+- `src/world/timeline.ts` — the map, `u` ↔ `(clip, seconds)`, waypoints
+- `src/world/engine.ts` — module singleton camera; survives page unmounts
+- `src/world/clips.ts` — one blob cache, shared with the home film
+- `src/world/useWorldEnabled.ts` — the single gate everything reads
+- `src/components/WorldStage.tsx` — fixed backdrop, route travel, veils
+- `src/components/Waypoint.tsx` — the page-head chip and position dot
+- `public/world/wp/*.jpg` — six posters cut from the parked frames (628 KB)
+- `ScrollWorld` now publishes its position, so leaving `/` mid-film flies on
+  from that exact frame instead of restarting
+
+### Measured, not assumed
+
+- Travel `/career` → `/hobbies` sampled frame by frame: approach 1.07 → 7.99,
+  handoff to inside 1.06 → 1.83, handoff to valley 3.87 → 5.15. It really does
+  walk the boardwalk, cross the house, and step out to the valley in ~1.2s.
+- Clips fetched **once** each across a session visiting all six tabs.
+- Reduced motion / iPhone / 800px desktop: **zero** mp4 requests, no world, no
+  chip, aurora untouched.
+- Contrast measured on real composited pixels with the page text hidden, not
+  modelled. Figures and the one `--text-faint` regression are in DESIGN.md.
+
+### Two things the first attempt got wrong
+
+- **A flat dim cannot do this job.** At 0.52 the interior waypoints read as
+  murk. Moving the contrast work into a centred column mask let the flat dim
+  drop to 0.20, which shows the room at the edges of the frame — where the
+  forest and the lit glass actually are — while the text column stays dark.
+- **Symmetric drift reverses the camera.** Parking at `waypoint ± DRIFT/2` meant
+  arriving, then sliding backwards. Forward-only drift fixed it, and moved
+  `/hobbies` from valley@5.2 to @4.6 to keep the whole drift inside the clip.
+
+### Still priced, not built
+
+Distinct *new* rooms — a podcast studio for `/writing`, a stage for `/speaking`,
+a workshop for `/projects` — need generation: ~7 credits per still, 15–20 per
+video leg, so roughly 100–130 credits to do all three properly as chained legs
+off the existing flight. Worth doing only if the reused frames start feeling
+repetitive.

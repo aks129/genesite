@@ -1,5 +1,6 @@
 import Reveal from "../components/Reveal";
 import { passions } from "../data/passions";
+import Waypoint from "../components/Waypoint";
 
 export default function HobbiesPage() {
   const personal = passions.filter(p => p.kind === "personal");
@@ -8,6 +9,7 @@ export default function HobbiesPage() {
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Outside work</div>
           <h1>Off hours.</h1>
           <p className="lede">

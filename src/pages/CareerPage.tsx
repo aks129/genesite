@@ -6,6 +6,7 @@ import CareerChart from "../components/CareerChart";
 import { career, type City } from "../data/career";
 import { expertise, tenureYears, tenureContext } from "../data/expertise";
 import { events } from "../data/events";
+import Waypoint from "../components/Waypoint";
 
 export default function CareerPage() {
   const [activeCity, setActiveCity] = useState<City | null>(null);
@@ -16,6 +17,7 @@ export default function CareerPage() {
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Career · 2003 → present</div>
           <h1>From Brooklyn to Pittsburgh.</h1>
           <p className="lede">

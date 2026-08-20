@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useReducedMotion } from "framer-motion";
 import Hero from "./Hero";
+import { publishU } from "../world/engine";
+import { loadClip } from "../world/clips";
+import { toU, SCENES as WORLD_SCENES } from "../world/timeline";
 import ScrambleText from "./ScrambleText";
 import { useMagnetic } from "../hooks/useMagnetic";
 
@@ -52,7 +55,6 @@ const smooth = (x: number) => { const c = clamp(x); return c * c * (3 - 2 * c); 
 type SceneRuntime = {
   el: HTMLDivElement | null;
   video: HTMLVideoElement | null;
-  url: string | null;
   loading: boolean;
   ready: boolean;
   cur: number;
@@ -100,7 +102,7 @@ function Film() {
       acc += s.weight;
       return {
         el: sceneRefs.current[i] ?? null,
-        video: null, url: null, loading: false, ready: false,
+        video: null, loading: false, ready: false,
         cur: 0, target: 0, start, end: acc / total,
       };
     });
@@ -109,13 +111,12 @@ function Film() {
     let raf = 0;
     let ticking = false;
 
-    function loadClip(i: number) {
+    function ensureClip(i: number) {
       const s = rt[i];
       if (s.loading || !s.el) return;
       s.loading = true;
-      fetch(SCENES[i].clip)
-        .then(r => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
-        .then(blob => {
+      loadClip(SCENES[i].clip)
+        .then(url => {
           if (!alive || !s.el) return;
           const v = document.createElement("video");
           v.className = "sw-scene__video";
@@ -124,8 +125,7 @@ function Film() {
           v.preload = "auto";
           v.setAttribute("muted", "");
           v.setAttribute("playsinline", "");
-          s.url = URL.createObjectURL(blob);
-          v.src = s.url;
+          v.src = url;
           v.addEventListener("loadedmetadata", () => { s.ready = true; });
           // Only hide the poster once a real frame has actually painted.
           v.addEventListener("seeked", () => { s.el?.classList.add("has-clip"); }, { once: true });
@@ -150,7 +150,7 @@ function Film() {
       for (let i = 0; i < rt.length; i++) {
         const s = rt[i];
         if (!s.el) continue;
-        if (p > s.start - 0.5 && p < s.end + 0.5) loadClip(i);
+        if (p > s.start - 0.5 && p < s.end + 0.5) ensureClip(i);
 
         s.target = clamp((p - s.start) / (s.end - s.start));
 
@@ -181,6 +181,10 @@ function Film() {
         // keyboard user could focus an invisible link mid-film.
         c.style.visibility = op < 0.02 ? "hidden" : "visible";
       }
+
+      // Hand the camera position to the world engine, so navigating to a tab
+      // flies on from this exact frame instead of restarting at the trailhead.
+      publishU(toU(ci, clamp(rt[ci].target) * WORLD_SCENES[ci].duration));
 
       host!.style.setProperty("--sw-p", p.toFixed(4));
       // The scrim exists to carry the copy — without copy it is just a dark
@@ -217,8 +221,8 @@ function Film() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", read);
       for (const s of rt) {
+        // The blob URL belongs to the shared cache — detach, never revoke.
         if (s.video) { s.video.removeAttribute("src"); s.video.load(); s.video.remove(); }
-        if (s.url) URL.revokeObjectURL(s.url);
       }
     };
   }, []);

@@ -1,6 +1,7 @@
 import Reveal from "../components/Reveal";
 import { useCursorGlow } from "../hooks/useCursorGlow";
 import { services, type Service, type ServiceCategory } from "../data/services";
+import Waypoint from "../components/Waypoint";
 
 const order: ServiceCategory[] = [
   "Strategy & Governance",
@@ -20,6 +21,7 @@ export default function ServicesPage() {
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Expertise</div>
           <h1>What I work on.</h1>
           <p className="lede">

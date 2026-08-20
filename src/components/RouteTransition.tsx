@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
+import { waypointFor, isFilmRoute } from "../world/timeline";
+import { useWorldEnabled } from "../world/useWorldEnabled";
 
 const SLATS = 7;
 /** easeInOutQuart-ish — smooth through the middle, no snap */
@@ -23,6 +25,11 @@ const LABELS: Record<string, string> = {
   "/hobbies": "~/off-hours",
 };
 
+/** " · the worktable" when the destination is a room, otherwise nothing. */
+function placeSuffix(pathname: string): string {
+  return isFilmRoute(pathname) ? "" : ` · ${waypointFor(pathname).place}`;
+}
+
 /** Distance from the centre slat, so the curtain opens outward from the middle. */
 function centreOut(i: number) {
   return Math.abs(i - (SLATS - 1) / 2);
@@ -37,6 +44,11 @@ function centreOut(i: number) {
 export default function RouteTransition() {
   const { pathname } = useLocation();
   const reduce = useReducedMotion();
+  const world = useWorldEnabled();
+  /* Flying to a room in the house is the transition — dropping a curtain over
+     it would hide the one thing worth watching. The slats still run for the
+     home film, and for anyone without the world. */
+  const travelling = world && !isFilmRoute(pathname);
   const [run, setRun] = useState(0);
   const [label, setLabel] = useState("~/");
   const first = useRef(true);
@@ -48,7 +60,7 @@ export default function RouteTransition() {
       return;
     }
     if (reduce) return;
-    setLabel(LABELS[pathname] ?? "~/");
+    setLabel((LABELS[pathname] ?? "~/") + placeSuffix(pathname));
     setRun(n => n + 1);
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setRun(0), TOTAL_MS);
@@ -60,9 +72,10 @@ export default function RouteTransition() {
   if (reduce || run === 0) return null;
 
   return (
-    <div className="route-wipe" aria-hidden="true">
-      <div className="route-wipe-slats">
-        {Array.from({ length: SLATS }).map((_, i) => (
+    <div className={travelling ? "route-wipe is-travel" : "route-wipe"} aria-hidden="true">
+      {!travelling && (
+        <div className="route-wipe-slats">
+          {Array.from({ length: SLATS }).map((_, i) => (
           <motion.span
             key={`${run}-${i}`}
             initial={{ y: "-101%" }}
@@ -75,8 +88,9 @@ export default function RouteTransition() {
             }}
             style={{ willChange: "transform" }}
           />
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <motion.span
         className="route-wipe-label"
         key={`label-${run}`}

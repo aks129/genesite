@@ -124,6 +124,69 @@ with the forest used for raised surfaces and fills.
       identity line 14.4:1, mid line 8.0:1, valley line 11.2:1. Re-measure if
       you touch the scrim stops, copy width, or swap footage.
     - Source assets and prompts: `docs/scroll-world/`.
+*   **The world** (`WorldStage`, every route except `/`): the site is one
+    building, and each tab is a place in it. The same three clips the home film
+    scrubs are re-cut as **waypoints** — a route parks the camera on one frame
+    of the single unbroken take, so navigating between tabs flies through the
+    house rather than cutting between themed pages. Nothing here was generated;
+    the whole map is sliced out of footage that already existed.
+
+    | Route | Place | Frame |
+    |---|---|---|
+    | `/career` | the boardwalk | approach @ 1.6s |
+    | `/expertise`, `/services` | the threshold | approach @ 6.6s |
+    | `/writing` | the reading corner | inside @ 3.2s |
+    | `/projects` | the worktable | inside @ 4.6s |
+    | `/speaking` | the screen wall | valley @ 1.4s |
+    | `/hobbies` | the overlook | valley @ 4.6s |
+
+    - **Same gate as the home film** — `useWorldEnabled()` (`861px` + fine
+      pointer + not reduced-motion), shared by the stage, the curtain bypass,
+      the page-head chip, and the aurora it stands in for. Verified: reduced
+      motion, iPhone, and an 800px desktop all download **zero** mp4 and keep
+      today's aurora untouched.
+    - **Travel** is a fixed ~1.1s eased tween in `u`, never scaled by distance —
+      `/career` → `/hobbies` crosses the whole house and pacing it by distance
+      would read as broken-slow. `RouteTransition` **drops its slats** while the
+      world is up (a curtain over the one thing worth watching), keeping only
+      the mono readout, now `▸ ~/projects · the worktable`. `PageShell` holds
+      the incoming page for 0.55s so the room arrives before the text does.
+    - **Drift is forward only.** A route parks exactly on its frame and reading
+      walks the camera `DRIFT` (0.9s) further in. Reversing across a seam is the
+      one move that breaks a single-take illusion, so `timeline.test.ts` fails
+      the build if any waypoint plus its full drift overruns its clip.
+    - **The camera outlives the page.** `world/engine.ts` is a module singleton,
+      not a hook — navigation unmounts a page mid-flight and the camera has to
+      keep going through it. `world/clips.ts` is one blob cache shared with the
+      home film: measured, each clip is fetched **once** across a session that
+      visits all six tabs (3 requests, not 12). Only the current leg loads
+      eagerly; the two adjacent ones warm on idle, and `saveData`/2g skips video
+      entirely and lets the waypoint stills carry the page.
+    - **Readability is the whole constraint.** Three veils, all keyed to
+      `--w-open` (1 on arrival → 0 once you have scrolled 0.45vh): a flat dim
+      (0.20 → 0.93), a lower-screen settle, and a **column mask** that holds the
+      middle 680px down while leaving the outer thirds bright. The column mask
+      is what buys the contrast, which is why the flat dim can afford to be thin
+      enough to actually show the room. Page heads carry their own pool of
+      shadow plus the `.sw-copy` text-shadow.
+    - Measured on the brightest waypoint (the overlook) against the **brightest
+      8px block** of real composited backdrop, text hidden — worst case across
+      the whole reading column:
+
+      | State | `--text` | `--text-soft` | `--accent` | `--text-faint` |
+      |---|---|---|---|---|
+      | arrival (`--w-open` 1) | 11.7 | 6.8 | 6.8 | 3.7 |
+      | scrolled (`--w-open` 0) | 11.8 | 6.9 | 6.9 | 3.7 |
+
+      Body and headings land at or above the site's existing 5.9–7.7 / 10.2–13.3
+      range. **`--text-faint` is the one regression**: ~5.0 on plain `--bg`,
+      3.7 here against the worst-case highlight (mean case ~4.9, unchanged). It
+      carries only tertiary metadata — chart ticks, city labels, hud indices.
+      Re-measure with the backdrop-only method if you touch a veil stop, a
+      waypoint, or the footage.
+    - Waypoint posters (`public/world/wp/*.jpg`, 628 KB total) are cut from the
+      exact parked frame with ffmpeg, so a page shows the correct image before
+      its video lands — and forever, if video never loads.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
     `useReducedMotion()` — see CLAUDE.md. Lenis included.

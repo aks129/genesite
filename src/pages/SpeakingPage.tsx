@@ -1,5 +1,6 @@
 import Reveal from "../components/Reveal";
 import { talks } from "../data/speaking";
+import Waypoint from "../components/Waypoint";
 
 export default function SpeakingPage() {
   const upcoming = talks.filter(t => t.upcoming);
@@ -9,6 +10,7 @@ export default function SpeakingPage() {
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Speaking · panels · meetups</div>
           <h1>Talks, panels, and the meetup.</h1>
           <p className="lede">

@@ -1,11 +1,13 @@
 import Reveal from "../components/Reveal";
 import { writings, recentItems } from "../data/writings";
+import Waypoint from "../components/Waypoint";
 
 export default function WritingPage() {
   return (
     <>
       <Reveal>
         <header className="page-head">
+          <Waypoint />
           <div className="dateline">Writing · podcast · Substack</div>
           <h1>Newsletter and podcast.</h1>
           <p className="lede">

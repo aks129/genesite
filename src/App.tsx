@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import WindBackground from "./components/WindBackground";
+import WorldStage from "./components/WorldStage";
 import LegoGene from "./components/LegoGene";
 import Nav from "./components/Nav";
 import Contact from "./components/Contact";
@@ -60,6 +61,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <WindBackground />
+      <WorldStage />
       <Nav />
       <SmoothScroll />
       <ScrollToTop />
