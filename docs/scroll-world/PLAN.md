@@ -295,3 +295,60 @@ inside 3.31 → 6.00 and valley 0.00 → 4.58, then flips to 1 the frame it sett
 Everything from the interactive list (the TV as a podcast viewer, the bookshelf
 as projects, mementos and photos) needs **zero credits** and remains the real
 work. See the pricing note above for what new rooms would cost.
+
+## BUILT — 2026-08-19 (later): the screen plays the podcast
+
+First of the interactive list, and it cost **0 credits** — as predicted, none of
+it needed generation.
+
+The display on the back wall of the screen-wall frame now shows *Out of the
+FHIR*, and a button below it opens a real Spotify player.
+
+### The split that makes it work
+
+A perspective-warped iframe would be unusable and an accessibility hole, so the
+two halves are separate:
+
+- **The control** is an ordinary button in `SpeakingPage`. Keyboard, screen
+  reader, phones and reduced-motion all get it, with the same player behind it.
+  The world is not required for the feature to work, only to make it beautiful.
+- **The plate** is decoration warped onto the panel, `pointer-events: none`,
+  carrying type only.
+
+### Getting the geometry right
+
+Corners were read off the parked frame with a pixel grid, then drawn back over
+the frame to confirm they traced the panel. They live on the waypoint as frame
+fractions, so `coverProject` can replay `object-fit: cover` and keep the plate
+glued at any window size. `transform-origin: 0 0` is mandatory; the default
+centre origin puts the plate nowhere near the wall.
+
+### Three bugs worth remembering
+
+1. **A hard black line across the TV.** The page-head scrim is a radial gradient
+   whose vertical radius exceeded 50% of its own box, so it was still opaque
+   where the box ended and the clip drew a visible edge across everything
+   behind it. Radius is now 48%.
+2. **A frame of fully lit screen at the start of every travel.** The plate
+   mounts inheriting the previous route's `--w-still`. Both world effects are
+   now layout effects, so the suppression lands before paint.
+3. **The guard latching on a mid-animation measurement.** `getBoundingClientRect`
+   on the page head reads a position PageShell is still animating away from, and
+   the answer was cached until the next resize. Now measured through
+   `offsetParent`, which sees settled layout on the first frame, plus a re-read
+   on `document.fonts.ready` because Fraunces changes the head's height.
+
+### Verified
+
+- 8 viewport sizes: at every size where the screen is on, no head copy sits on
+  its lit area; at every size where copy would, the screen is off.
+- Zero spotify.com requests on a plain visit; 29 once opened.
+- Esc closes, backdrop closes, focus returns to the button, iframe unmounts.
+- Travel holds the plate at 0 throughout and lifts it to 1 on arrival.
+- Reduced motion and iPhone: no plate, no world, working button and player.
+
+### Next on the list
+
+The bookshelf as projects is the same mechanism — a `Surface` on the `/writing`
+waypoint plus hotspots — and needs no new architecture. Photos and mementos need
+Gene's actual images, not generated ones.

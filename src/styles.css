@@ -1817,11 +1817,15 @@ body.world-on .page-head::before {
   position: absolute;
   inset: -56px -46vw -40px;
   z-index: -1;
+  /* The vertical radius must stay at or under 50%, or the ellipse is still
+     opaque where the box ends and the clip draws a hard horizontal line across
+     whatever sits behind it — which is exactly what it did across the screen
+     on the wall. */
   background: radial-gradient(
-    ellipse 42% 76% at 50% 50%,
+    ellipse 44% 48% at 50% 50%,
     rgba(20, 27, 21, 0.94) 0%,
-    rgba(20, 27, 21, 0.90) 44%,
-    rgba(20, 27, 21, 0.52) 74%,
+    rgba(20, 27, 21, 0.90) 46%,
+    rgba(20, 27, 21, 0.52) 76%,
     rgba(20, 27, 21, 0) 100%
   );
 }
@@ -1860,4 +1864,187 @@ body.world-on .page-head .lede {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 3px rgba(255, 166, 30, 0.18);
+}
+
+/* ---- The screen on the wall ----
+   A flat plate laid onto the display in the footage with a projective
+   transform (see world/homography.ts). Decoration only: the real control is a
+   button in the page, so this never needs to be hit-tested or focused, and it
+   works identically for people who never see it. */
+.world-plate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 500px;
+  /* Without this the matrix is applied about the centre of the box and the
+     plate lands nowhere near the wall. */
+  transform-origin: 0 0;
+  z-index: 8;              /* above every veil: a screen emits its own light */
+  /* --w-fit is the collision guard: 0 whenever the panel would reach into the
+     page head. See WorldStage. */
+  opacity: calc(var(--w-still, 0) * var(--w-fit, 1));
+  transition: opacity 220ms linear;
+  pointer-events: none;
+}
+/* Standby: the panel in the footage is a dark matte screen, so the plate reads
+   as one showing almost nothing. It lifts to full when the player opens. */
+.world-plate__inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+  padding: 0 64px;
+  /* A screen emits; it does not merely sit there. Opaque, self-lit, and a
+     touch warmer than the room so it reads as the one active thing on the
+     wall — which is exactly how the pavilion was lit in the first place. */
+  background:
+    /* Dark top strip. Real panels have a bezel, and it means the last line of
+       a lede grazing the top of the screen still has ground to sit on. */
+    linear-gradient(180deg, rgba(10, 14, 11, 0.92) 0%, rgba(10, 14, 11, 0.55) 9%, transparent 20%),
+    radial-gradient(ellipse 90% 130% at 20% 52%, rgba(255, 166, 30, 0.30), transparent 72%),
+    linear-gradient(160deg, #223026 0%, #16201a 62%, #101812 100%);
+  box-shadow: inset 0 0 90px rgba(255, 166, 30, 0.10);
+  transition: filter 420ms ease;
+}
+body.screen-on .world-plate__inner { filter: brightness(1.45) saturate(1.1); }
+.world-plate__eyebrow {
+  font-family: var(--mono);
+  font-size: 34px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.world-plate__title {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 62px;
+  line-height: 1.1;
+  color: var(--text);
+}
+.world-plate__cue {
+  font-family: var(--mono);
+  font-size: 28px;
+  letter-spacing: 0.16em;
+  color: var(--pop);
+}
+
+/* ---- The screen slot: deliberate empty space on the wall ---- */
+.screen-slot {
+  margin: 0 0 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+/* Only when the room is actually behind the page does the slot reserve wall.
+   Without the world it is just a button under the lede, which is correct. */
+body.world-on .screen-slot {
+  min-height: 30vh;
+  justify-content: flex-end;
+}
+.screen-power {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 560;
+  color: var(--text);
+  background: var(--accent-deep);
+  border: 1px solid var(--accent-deep);
+  border-radius: 8px;
+  padding: 11px 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.screen-power em {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+}
+.screen-power__glyph { color: #FFFFFF; }
+.screen-power:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(255, 166, 30, 0.22);
+}
+.screen-slot__note {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+/* ---- The player itself: never warped, always usable ---- */
+.screen-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgba(10, 14, 11, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  animation: screen-fade 220ms ease;
+}
+@keyframes screen-fade { from { opacity: 0; } to { opacity: 1; } }
+.screen-modal__panel {
+  /* Spotify's 352px-tall embed lays out horizontally and clips its own episode
+     title under roughly 700px of inner width. */
+  width: min(760px, 100%);
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+.screen-modal__panel:focus { outline: none; }
+.screen-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.screen-modal__eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.screen-modal__close {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-soft);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+.screen-modal__close:hover { border-color: var(--accent); color: var(--accent); }
+.screen-modal__frame {
+  display: block;
+  width: 100%;
+  height: 352px;
+  border: 0;
+  border-radius: 10px;
+}
+.screen-modal__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 14px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-modal { animation: none; }
+  .world-plate__inner { transition: none; }
 }

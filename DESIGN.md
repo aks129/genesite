@@ -186,6 +186,41 @@ with the forest used for raised surfaces and fills.
       carries only tertiary metadata — chart ticks, city labels, hud indices.
       Re-measure with the backdrop-only method if you touch a veil stop, a
       waypoint, or the footage.
+*   **The screen on the wall** (`/speaking`): the display in the footage plays
+    the podcast. Two separate pieces, deliberately:
+    - **The control is a real button in the page**, never a hotspot on the
+      footage. It is keyboard-reachable, screen-reader-legible, and identical
+      on phones and under reduced motion, which get the same button and the
+      same player with no room behind it. The `screen-slot` only reserves wall
+      space when `body.world-on`.
+    - **The plate is decoration**: a flat element warped onto the panel with a
+      projective transform (`world/homography.ts`), `pointer-events: none`
+      throughout, `z-index: 8` so it sits above every veil — a screen emits its
+      own light. It carries type only, no fetched artwork, per the
+      no-stock-imagery rule.
+    - The surface lives on the waypoint (`Surface` in timeline.ts) as corners in
+      frame fractions, read off the parked frame with a pixel grid and verified
+      by drawing them back over it. `coverProject` replays what `object-fit:
+      cover` + `object-position: center 45%` does, so the plate stays glued as
+      the window changes. **`transform-origin: 0 0` is mandatory** — with the
+      default centre origin the matrix lands nowhere near the wall.
+    - Only valid while the camera is parked, so the plate is bound to
+      `--w-still`: it is suppressed for the whole of a travel and fades with the
+      still on scroll.
+    - **The collision guard.** Where the panel lands is decided by the footage
+      and the window, not the layout, so the two can meet. `--w-fit` measures it
+      every read: if the panel's lit area reaches into the page head, the screen
+      stays off. Verified across 8 viewport sizes — at every size where the
+      screen is on, no head copy sits on its lit area; at every size where copy
+      would, it is off (1280×800, 1366×768, 900×900, 1600×700 are all off; the
+      button still works there). The head is measured through `offsetParent`
+      rather than `getBoundingClientRect`, because PageShell slides content in
+      from 14px down and a rect read during that animation gets latched.
+    - The Spotify iframe **mounts only when the player opens** — measured zero
+      spotify.com requests on a plain page visit, 29 after opening. Esc and
+      backdrop close it, focus returns to the button, and the iframe unmounts.
+    - The panel is 760px wide because Spotify's 352px-tall embed clips its own
+      episode title under roughly 700px of inner width.
     - Waypoint posters (`public/world/wp/*.jpg`, 1.2 MB total) are cut from the
       exact parked frame with ffmpeg, so a page shows the correct image before
       its video lands — and forever, if video never loads.

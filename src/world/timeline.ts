@@ -61,6 +61,21 @@ export function fromU(u: number): { scene: number; seconds: number } {
   return { scene, seconds: Math.min(t - OFFSETS[scene], SCENES[scene].duration) };
 }
 
+/**
+ * A flat surface inside the footage that page content can be laid onto.
+ *
+ * Corners are fractions of the 1280x720 frame, clockwise from top-left, read
+ * off the parked frame with a pixel grid and verified by drawing them back
+ * over it. Only valid while the camera is parked: drift moves the surface, so
+ * anything mounted here is gated on the arrival state.
+ */
+export type Surface = {
+  corners: [[number, number], [number, number], [number, number], [number, number]];
+  /** Reference box the content is laid out in before being warped. */
+  refW: number;
+  refH: number;
+};
+
 export type Waypoint = {
   /** index into SCENES */
   scene: number;
@@ -72,11 +87,29 @@ export type Waypoint = {
   place: string;
   /** poster cut from this exact frame with ffmpeg */
   poster: string;
+  /** a surface in this frame that page content can be projected onto */
+  surface?: Surface;
 };
 
-function wp(scene: number, seconds: number, place: string, poster: string): Waypoint {
-  return { scene, seconds, u: toU(scene, seconds), place, poster };
+function wp(
+  scene: number, seconds: number, place: string, poster: string, surface?: Surface,
+): Waypoint {
+  return { scene, seconds, u: toU(scene, seconds), place, poster, surface };
 }
+
+/** The display on the back wall of the screen-wall frame (valley @ 1.4s). */
+const SCREEN: Surface = {
+  corners: [
+    [0.31992, 0.37778],
+    [0.52539, 0.38611],
+    [0.52406, 0.56319],
+    [0.31938, 0.56667],
+  ],
+  // The panel reads about 2:1 in frame, so lay the plate out at 2:1 and the
+  // warp stays close to a pure scale rather than squashing the type.
+  refW: 1000,
+  refH: 500,
+};
 
 /*
  * Seam rule: a waypoint plus its full forward DRIFT must stay inside its own
@@ -89,7 +122,7 @@ export const WAYPOINTS: Record<string, Waypoint> = {
   "/services":  wp(0, 6.6, "the threshold",     "/world/wp/expertise.jpg"),
   "/writing":   wp(1, 3.2, "the reading corner", "/world/wp/writing.jpg"),
   "/projects":  wp(1, 4.6, "the worktable",     "/world/wp/projects.jpg"),
-  "/speaking":  wp(2, 1.4, "the screen wall",   "/world/wp/speaking.jpg"),
+  "/speaking":  wp(2, 1.4, "the screen wall",   "/world/wp/speaking.jpg", SCREEN),
   "/hobbies":   wp(2, 4.6, "the overlook",      "/world/wp/hobbies.jpg"),
 };
 

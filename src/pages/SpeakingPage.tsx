@@ -1,6 +1,7 @@
 import Reveal from "../components/Reveal";
 import { talks } from "../data/speaking";
 import Waypoint from "../components/Waypoint";
+import ScreenPlayer from "../components/ScreenPlayer";
 
 export default function SpeakingPage() {
   const upcoming = talks.filter(t => t.upcoming);
@@ -20,6 +21,8 @@ export default function SpeakingPage() {
           </p>
         </header>
       </Reveal>
+
+      <ScreenPlayer />
 
       {upcoming.length > 0 && (
         <Reveal>

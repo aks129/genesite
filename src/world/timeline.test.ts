@@ -74,6 +74,37 @@ describe("waypoints", () => {
     expect(waypointFor("/projects").place).toBe("the worktable");
   });
 
+  it("keeps every surface inside its frame and shaped like a quad", () => {
+    for (const [route, wp] of entries) {
+      if (!wp.surface) continue;
+      const { corners, refW, refH } = wp.surface;
+      expect(corners, route).toHaveLength(4);
+      for (const [fx, fy] of corners) {
+        expect(fx, `${route} corner x`).toBeGreaterThan(0);
+        expect(fx, `${route} corner x`).toBeLessThan(1);
+        expect(fy, `${route} corner y`).toBeGreaterThan(0);
+        expect(fy, `${route} corner y`).toBeLessThan(1);
+      }
+      // Clockwise from top-left: the top pair must sit above the bottom pair,
+      // and the left pair left of the right pair, or the warp comes out mirrored.
+      const [tl, tr, br, bl] = corners;
+      expect(tl[1], `${route} TL above BL`).toBeLessThan(bl[1]);
+      expect(tr[1], `${route} TR above BR`).toBeLessThan(br[1]);
+      expect(tl[0], `${route} TL left of TR`).toBeLessThan(tr[0]);
+      expect(bl[0], `${route} BL left of BR`).toBeLessThan(br[0]);
+      expect(refW / refH, `${route} ref aspect`).toBeGreaterThan(0.2);
+      expect(refW / refH, `${route} ref aspect`).toBeLessThan(6);
+    }
+  });
+
+  it("puts the screen on the screen wall and nowhere else", () => {
+    expect(WAYPOINTS["/speaking"].surface).toBeDefined();
+    const others = entries.filter(([r]) => r !== "/speaking");
+    for (const [route, wp] of others) {
+      expect(wp.surface, `${route} should not carry a surface yet`).toBeUndefined();
+    }
+  });
+
   it("aliases /services onto the same frame as /expertise", () => {
     expect(WAYPOINTS["/services"].u).toBe(WAYPOINTS["/expertise"].u);
     expect(WAYPOINTS["/services"].place).toBe(WAYPOINTS["/expertise"].place);
