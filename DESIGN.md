@@ -178,6 +178,8 @@ with the forest used for raised surfaces and fills.
       | arrival (`--w-open` 1) | 11.7 | 6.8 | 6.8 | 3.7 |
       | scrolled (`--w-open` 0) | 11.8 | 6.9 | 6.9 | 3.7 |
 
+      Cross-checked on the boardwalk (bright sky through trees), which measures
+      better at 13.0 / 7.6 / 7.6 / 4.1 — the overlook is the true worst case.
       Body and headings land at or above the site's existing 5.9–7.7 / 10.2–13.3
       range. **`--text-faint` is the one regression**: ~5.0 on plain `--bg`,
       3.7 here against the worst-case highlight (mean case ~4.9, unchanged). It
