@@ -64,8 +64,15 @@ function Stage({ pathname }: { pathname: string }) {
 
     // Landing straight on a tab means the camera was never anywhere else, so
     // there is nothing to fly from. Everything after that is a real move.
-    if (world.hasPosition()) world.travelTo(wp.u, TRAVEL_MS);
-    else world.jumpTo(wp.u);
+    let travelling = false;
+    let settle = 0;
+    if (world.hasPosition()) {
+      world.travelTo(wp.u, TRAVEL_MS);
+      travelling = true;
+      settle = window.setTimeout(() => { travelling = false; read(); }, TRAVEL_MS);
+    } else {
+      world.jumpTo(wp.u);
+    }
 
     // Warm the neighbouring clips while idle. Travel degrades gracefully
     // without them — an uncached leg shows its still instead of flying — but a
@@ -84,6 +91,8 @@ function Stage({ pathname }: { pathname: string }) {
       // Arrival state: open at the top, closed once the head has scrolled off.
       const open = 1 - clamp(y / (vh * OPEN_SPAN));
       host.style.setProperty("--w-open", open.toFixed(3));
+      // The sharp still covers the clip while parked and open; never in flight.
+      host.style.setProperty("--w-still", travelling ? "0" : open.toFixed(3));
 
       // Drift: the route parks on its frame and reading walks the camera
       // DRIFT seconds further in. Forward only — never back past the waypoint.
@@ -98,6 +107,7 @@ function Stage({ pathname }: { pathname: string }) {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", read);
     return () => {
+      window.clearTimeout(settle);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", read);
     };

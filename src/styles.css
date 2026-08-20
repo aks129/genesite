@@ -1735,7 +1735,21 @@ body.world-on .wind-bg { display: none; }
   object-position: center 45%;
 }
 .world-scene__video { z-index: 1; }
-.world-scene.has-clip .world-scene__still { opacity: 0; }
+/*
+ * The still outranks the clip while the visitor is looking at the room.
+ *
+ * Three of the waypoint stills are 4K upscales; the footage under them is
+ * 720p. Letting the video take over on arrival would mean the page got
+ * *softer* the longer you looked at it. So the still holds through the arrival
+ * state and hands off to the clip as the camera starts to drift — which is
+ * also when the veil is thickening, so the resolution drop happens under
+ * cover of darkness. `--w-still` is 0 during travel, because there the moving
+ * camera is the whole point.
+ */
+.world-scene.has-clip .world-scene__still {
+  opacity: var(--w-still, 0);
+  transition: opacity 220ms linear;
+}
 
 /* Flat dim: 0.20 on arrival so the room is genuinely present, 0.93 once the
    visitor has scrolled into the copy. Kept deliberately light — the column mask

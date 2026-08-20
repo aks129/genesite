@@ -186,9 +186,20 @@ with the forest used for raised surfaces and fills.
       carries only tertiary metadata — chart ticks, city labels, hud indices.
       Re-measure with the backdrop-only method if you touch a veil stop, a
       waypoint, or the footage.
-    - Waypoint posters (`public/world/wp/*.jpg`, 628 KB total) are cut from the
+    - Waypoint posters (`public/world/wp/*.jpg`, 1.2 MB total) are cut from the
       exact parked frame with ffmpeg, so a page shows the correct image before
       its video lands — and forever, if video never loads.
+    - **The still outranks the clip on arrival.** `career`, `writing` and
+      `hobbies` are 4K upscales (`bytedance_image_upscale`, 2 credits each)
+      shipped at 2560×1440; the footage beneath them is 720p. Letting video take
+      over on arrival would make a page get *softer* the longer you looked at
+      it, so `--w-still` holds the still over the clip while parked and open,
+      and hands off as the camera starts to drift — which is also when the veil
+      is thickening, so the resolution drop happens under cover of darkness.
+      `--w-still` is forced to 0 for the length of a travel, because there the
+      moving camera is the entire point. Verified by DOM sampling in both
+      directions. `expertise`, `projects` and `speaking` are still 720p cuts;
+      upscaling them is 2 credits each whenever there is budget.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
     `useReducedMotion()` — see CLAUDE.md. Lenis included.

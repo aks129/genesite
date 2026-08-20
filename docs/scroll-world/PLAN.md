@@ -247,3 +247,51 @@ a workshop for `/projects` — need generation: ~7 credits per still, 15–20 pe
 video leg, so roughly 100–130 credits to do all three properly as chained legs
 off the existing flight. Worth doing only if the reused frames start feeling
 repetitive.
+
+## BUILT — 2026-08-19 (late): spent the last of the trial credits
+
+The MCP trial was ending within the hour with **7.5 credits** left. Video legs
+start at 15, so new geography was impossible. Preflighted the alternatives and
+found `bytedance_image_upscale` at **2 credits** for a 4K upscale, same price at
+2K, which made the best available purchase obvious: the waypoint posters were
+720p frames stretched across a 1440px+ viewport.
+
+**Spent 6 of 7.5 credits on three 4K upscales.** Picked the frames with the most
+high-frequency detail, where upscaling pays: `career` (forest, moss, wet
+planks), `writing` (the bookshelf), `hobbies` (misty valley, conifer edges).
+`expertise`, `projects` and `speaking` are darker, smoother interiors that gain
+least, and are still 720p cuts. The remaining **1.5 credits buy nothing** — one
+more upscale costs 2.
+
+The upscales are faithful, not inventive: same books, same vessels, same tree,
+same layout, with real detail recovered rather than new objects hallucinated.
+And no gibberish on the book spines, which is the failure mode the original
+prompt's hard negatives exist to avoid.
+
+| Poster | Before | After |
+|---|---|---|
+| career | 1280×720, 171 KB | 2560×1440, 434 KB |
+| writing | 1280×720, 83 KB | 2560×1440, 286 KB |
+| hobbies | 1280×720, 73 KB | 2560×1440, 225 KB |
+
+### The change that made the credits count
+
+Shipping sharper posters alone would have been pointless, and actually worse:
+the 720p video takes over a few seconds after arrival, so the page would have
+started sharp and then gone soft. So the handoff was inverted. `--w-still` holds
+the still above the clip while the visitor is parked and looking at the room,
+and releases it as the camera starts to drift, which is exactly when the veil
+thickens toward 0.93. The resolution drop happens where it cannot be seen.
+During a travel `--w-still` is pinned to 0, because there the moving camera is
+the point.
+
+Sampled both transitions in the browser to confirm: arrival shows a 2560-wide
+still at opacity 1 over a loaded video; scrolling takes the still to 0 with the
+clip drifting at 3.65s; a travel keeps the still at 0 while the camera crosses
+inside 3.31 → 6.00 and valley 0.00 → 4.58, then flips to 1 the frame it settles.
+
+### Still not built
+
+Everything from the interactive list (the TV as a podcast viewer, the bookshelf
+as projects, mementos and photos) needs **zero credits** and remains the real
+work. See the pricing note above for what new rooms would cost.
