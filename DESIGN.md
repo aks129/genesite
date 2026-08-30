@@ -235,6 +235,32 @@ with the forest used for raised surfaces and fills.
       moving camera is the entire point. Verified by DOM sampling in both
       directions. `expertise`, `projects` and `speaking` are still 720p cuts;
       upscaling them is 2 credits each whenever there is budget.
+*   **The radio** (`Radio`, every page): a small dial docked bottom-right,
+    mounted in `App` outside `<Routes>` alongside the world and the mascot, so
+    music does not stop when you walk into another room. The site is one
+    building and sound carries.
+    - **YouTube, not Spotify.** A Spotify embed plays 30-second previews unless
+      the listener is signed in to Spotify in that browser, which is not a
+      radio. YouTube plays in full for everyone with no account.
+    - **Nothing loads from YouTube until a station is picked**, and the click
+      that picks it is the user gesture that permits unmuted playback. Verified
+      by test, not by assertion.
+    - **Once created the player is never unmounted or hidden** until the visitor
+      stops it. Folding the dial away hides only the station list. Hiding an
+      iframe to keep the audio would risk the browser tearing it down, and
+      taking audio from a hidden YouTube video is against their terms anyway —
+      so the video is shown, small, which suits a house full of windows.
+    - **Every station carries a link out.** A channel can disable embedding,
+      geo-block, or take a stream down, and the parent page cannot detect any of
+      it cross-origin. The link is what stands between that and a dead panel.
+    - **It yields to the podcast.** Opening the screen player fires
+      `SCREEN_EVENT`; the radio pauses via the YouTube JS API rather than
+      talking over it. Failure mode is the old behaviour, so no fallback needed.
+    - Stations live in `src/data/radio.ts` with the channel credited on the
+      dial. Every id was checked against YouTube's oEmbed endpoint. Streams do
+      end; swapping `video` is a one-line change.
+    - The last station is remembered, and **never auto-started** — audio that
+      begins without being asked for is the rudest thing a page can do.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
 *   **Reduced-motion contract:** every motion source gates on
     `useReducedMotion()` — see CLAUDE.md. Lenis included.

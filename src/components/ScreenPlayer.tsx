@@ -18,9 +18,8 @@ const SHOW = writings.find(w => w.kind === "podcast")!;
 const SHOW_ID = SHOW.href.split("/show/")[1]?.split(/[?#]/)[0] ?? "";
 const EMBED = `https://open.spotify.com/embed/show/${SHOW_ID}?utm_source=generator&theme=0`;
 
-export function screenIsOn(): boolean {
-  return document.body.classList.contains("screen-on");
-}
+/** Fired when the podcast player opens or closes, so the radio can yield. */
+export const SCREEN_EVENT = "gene:screen";
 
 export default function ScreenPlayer() {
   const [open, setOpen] = useState(false);
@@ -28,9 +27,14 @@ export default function ScreenPlayer() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // The plate on the wall brightens while the player is up: the screen is on.
+  // The radio listens for this too, and stops talking over it.
   useEffect(() => {
     document.body.classList.toggle("screen-on", open);
-    return () => document.body.classList.remove("screen-on");
+    window.dispatchEvent(new CustomEvent(SCREEN_EVENT, { detail: { open } }));
+    return () => {
+      document.body.classList.remove("screen-on");
+      window.dispatchEvent(new CustomEvent(SCREEN_EVENT, { detail: { open: false } }));
+    };
   }, [open]);
 
   useEffect(() => {

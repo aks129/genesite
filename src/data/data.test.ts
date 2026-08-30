@@ -8,8 +8,50 @@ import { career, cityCoords } from "./career";
 import { expertise, tenureYears } from "./expertise";
 import { events } from "./events";
 import { services } from "./services";
+import { stations, embedUrl, watchUrl } from "./radio";
 
 describe("data integrity", () => {
+  it("radio stations have a name, blurb, credited channel, and a video id", () => {
+    expect(stations.length).toBeGreaterThan(0);
+    const seen = new Set<string>();
+    for (const s of stations) {
+      expect(s.name).toBeTruthy();
+      expect(s.blurb).toBeTruthy();
+      // The channel is somebody else's work and gets credited on the dial.
+      expect(s.channel).toBeTruthy();
+      expect(s.source).toBeTruthy();
+      // YouTube ids are 11 chars of [A-Za-z0-9_-].
+      expect(s.video, s.name).toMatch(/^[A-Za-z0-9_-]{11}$/);
+      expect(seen.has(s.video), `${s.name} duplicates a station`).toBe(false);
+      seen.add(s.video);
+    }
+  });
+
+  it("every station has a way out when the embed will not play", () => {
+    // A channel can disable embedding, geo-block, or take a stream down, and
+    // the parent page cannot detect any of it cross-origin. The link is the
+    // only thing standing between that and a dead panel.
+    for (const s of stations) {
+      expect(watchUrl(s)).toBe(`https://www.youtube.com/watch?v=${s.video}`);
+    }
+  });
+
+  it("builds an embed that autoplays, and loops only finite mixes", () => {
+    for (const s of stations) {
+      const url = embedUrl(s);
+      expect(url).toContain("youtube-nocookie.com/embed/" + s.video);
+      expect(url).toContain("autoplay=1");
+      expect(url).toContain("playsinline=1");
+      if (s.loop) {
+        // `loop` is ignored on a single video unless `playlist` names it too.
+        expect(url).toContain("loop=1");
+        expect(url).toContain("playlist=" + s.video);
+      } else {
+        expect(url).not.toContain("loop=1");
+      }
+    }
+  });
+
   it("projects have a name and description", () => {
     expect(projects.length).toBeGreaterThan(0);
     for (const p of projects) {

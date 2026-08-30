@@ -4,6 +4,7 @@ import { useReducedMotion } from "framer-motion";
 import WindBackground from "./components/WindBackground";
 import WorldStage from "./components/WorldStage";
 import LegoGene from "./components/LegoGene";
+import Radio from "./components/Radio";
 import Nav from "./components/Nav";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
@@ -87,6 +88,7 @@ export default function App() {
         <Footer />
       </main>
       <LegoGene />
+      <Radio />
     </BrowserRouter>
   );
 }
