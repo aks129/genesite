@@ -11,9 +11,18 @@
  * rather than a dead panel. Channels are credited by name — this is somebody
  * else's stream, playing in Gene's house.
  *
- * All six IDs below were checked against YouTube's oEmbed endpoint and resolve
- * to public videos with the titles quoted in `source`. Streams do end, though:
- * if a station goes quiet, swap `video` here and nothing else changes.
+ * Every id below was played in a real browser, inside a real embedding page,
+ * and confirmed to reach the player rather than an error screen. That check
+ * matters more than it sounds: oEmbed happily returns 200 for a stream that has
+ * ended, and the first draft of this list shipped Lofi Girl's famous
+ * `jfKfPfyJRdk`, which resolves fine and then plays "This live stream recording
+ * is not available" — the stream was taken down in May 2026. An embed loaded as
+ * a top-level page always errors too, so it has to be tested embedded.
+ *
+ * Two of these four are live streams, and live streams die. If a station goes
+ * quiet, swap `video` here and nothing else changes; the "open on YouTube" link
+ * in the dock means a dead embed degrades to a working link rather than a dead
+ * panel, because the page cannot detect the failure cross-origin.
  */
 
 export type Station = {
@@ -56,10 +65,10 @@ export const stations: Station[] = [
   },
   {
     name: "work light",
-    blurb: "the one everybody already knows",
-    video: "jfKfPfyJRdk",
-    channel: "Lofi Girl",
-    source: "lofi hip hop radio — beats to relax/study to",
+    blurb: "minimal grooves, nothing to sing along to",
+    video: "MP0M6zS989g",
+    channel: "ours.",
+    source: "24/7 LIVE Chillout House Mix — Soft Minimal Grooves for Sustained Focus & Stillness",
   },
 ];
 

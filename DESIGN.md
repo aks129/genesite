@@ -257,8 +257,13 @@ with the forest used for raised surfaces and fills.
       `SCREEN_EVENT`; the radio pauses via the YouTube JS API rather than
       talking over it. Failure mode is the old behaviour, so no fallback needed.
     - Stations live in `src/data/radio.ts` with the channel credited on the
-      dial. Every id was checked against YouTube's oEmbed endpoint. Streams do
-      end; swapping `video` is a one-line change.
+      dial. **Verify a station by playing it in a browser, inside a real
+      embedding page** — oEmbed returns 200 for streams that have ended, and an
+      embed loaded as a top-level page always errors regardless. The first draft
+      shipped Lofi Girl's `jfKfPfyJRdk`, which passes oEmbed and then plays
+      "This live stream recording is not available"; it was taken down in May
+      2026. Two of the four are live streams and live streams die; swapping
+      `video` is a one-line change.
     - The last station is remembered, and **never auto-started** — audio that
       begins without being asked for is the rudest thing a page can do.
 *   **Reveals:** framer-motion `Reveal` per section (existing contract).
