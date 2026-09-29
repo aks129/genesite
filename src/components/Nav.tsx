@@ -4,9 +4,10 @@ import { useMagnetic } from "../hooks/useMagnetic";
 const items: { to: string; label: string }[] = [
   { to: "/", label: "home" },
   { to: "/career", label: "career" },
-  { to: "/expertise", label: "expertise" },
+  { to: "/ai", label: "AI" },
+  { to: "/healthcare", label: "healthcare" },
   { to: "/projects", label: "projects" },
-  { to: "/writing", label: "podcast + writing" },
+  { to: "/writing", label: "writing" },
   { to: "/speaking", label: "speaking" },
   { to: "/hobbies", label: "hobbies" },
 ];

@@ -19,8 +19,8 @@ const PILLARS: Pillar[] = [
     body:
       "Agents, evals, guardrails. Making machines useful — and honest about what they touch.",
     words: ["build", "eval", "guard", "ship"],
-    to: "/projects",
-    cta: "See the projects →",
+    to: "/ai",
+    cta: "The AI practice →",
   },
   {
     id: "02",
@@ -28,8 +28,8 @@ const PILLARS: Pillar[] = [
     body:
       "FHIR, clinical data, interoperability. Moving health data so care actually improves.",
     words: ["connect", "measure", "move", "mend"],
-    to: "/career",
-    cta: "See the work →",
+    to: "/healthcare",
+    cta: "The healthcare practice →",
   },
 ];
 

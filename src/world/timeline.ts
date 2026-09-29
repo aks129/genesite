@@ -120,6 +120,8 @@ export const WAYPOINTS: Record<string, Waypoint> = {
   "/career":    wp(0, 1.6, "the boardwalk",     "/world/wp/career.jpg"),
   "/expertise": wp(0, 6.6, "the threshold",     "/world/wp/expertise.jpg"),
   "/services":  wp(0, 6.6, "the threshold",     "/world/wp/expertise.jpg"),
+  "/ai":        wp(1, 2.1, "the long room",     "/world/wp/ai.jpg"),
+  "/healthcare": wp(2, 3.2, "the corner window", "/world/wp/healthcare.jpg"),
   "/writing":   wp(1, 3.2, "the reading corner", "/world/wp/writing.jpg"),
   "/projects":  wp(1, 4.6, "the worktable",     "/world/wp/projects.jpg"),
   "/speaking":  wp(2, 1.4, "the screen wall",   "/world/wp/speaking.jpg", SCREEN),

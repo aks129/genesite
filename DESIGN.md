@@ -10,7 +10,9 @@ soft card glow, film grain; whoisjoa.studio for structure — mission statement
 before name, mixed-type headlines with italic-serif emphasis, underscore mono
 eyebrows, few words, huge calm space).
 
-Content structure: the home page leads with the mission ("build things, make
+Content structure (updated 2026-09-29): **two practices, kept separate.** `/ai` and `/healthcare` are standalone pages from `src/data/practices.ts` on one shared layout: stats, who it is for and not for, offerings named in Gene's own terms, proof, (healthcare only) buyer segments and a dated regulatory panel, free reading, and a three-step engagement ladder that runs straight into the contact panel. Borrowed from Parlance Labs, Every, Hugo Bowne-Anderson, Moehrke Research, and Point-of-Care Partners: named engagement types, explicit fit lines, numbers over adjectives, writing as proof, and rules named with their dates. `/expertise` is only two doors.
+
+The home page leads with the mission ("build things, make
 them better, help people solve real problems"), then **two pillars, kept
 separate: Artificial Intelligence and Healthcare Technology.** The person
 comes last and briefly.
@@ -169,6 +171,13 @@ with the forest used for raised surfaces and fills.
       is what buys the contrast, which is why the flat dim can afford to be thin
       enough to actually show the room. Page heads carry their own pool of
       shadow plus the `.sw-copy` text-shadow.
+    - **Page-head shadow pool is viewport-width, not `-46vw` insets.** The old
+      insets ran about 230px past the right edge at 1440 and gave every page a
+      sideways scroll (live in production until 2026-09-29). It is now centred,
+      `calc(100vw - 32px)` wide, with the ellipse radius raised to 62% to keep
+      the same size. Re-measured after the change on the overlook: body text
+      6.2 to 7.4:1, headings 10.7 to 12.8:1. On the new corner-window room
+      (`/healthcare`): body 7.0 to 8.2:1.
     - Measured on the brightest waypoint (the overlook) against the **brightest
       8px block** of real composited backdrop, text hidden — worst case across
       the whole reading column:

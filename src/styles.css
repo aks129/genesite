@@ -1815,14 +1815,23 @@ body.world-on .page-head { position: relative; }
 body.world-on .page-head::before {
   content: "";
   position: absolute;
-  inset: -56px -46vw -40px;
+  top: -56px;
+  bottom: -40px;
+  /* Centred on the column and no wider than the viewport. The old
+     `inset: 0 -46vw` ran about 230px past the right edge at 1440 and gave
+     every page a sideways scroll. The 32px margin covers classic
+     scrollbars, where 100vw is wider than the visible page. */
+  left: 50%;
+  width: calc(100vw - 32px);
+  transform: translateX(-50%);
   z-index: -1;
   /* The vertical radius must stay at or under 50%, or the ellipse is still
      opaque where the box ends and the clip draws a hard horizontal line across
-     whatever sits behind it — which is exactly what it did across the screen
-     on the wall. */
+     whatever sits behind it, which is exactly what it did across the screen
+     on the wall. The horizontal radius is 62% of the narrower box, which keeps
+     the pool the same size it was at 1440. */
   background: radial-gradient(
-    ellipse 44% 48% at 50% 50%,
+    ellipse 62% 48% at 50% 50%,
     rgba(20, 27, 21, 0.94) 0%,
     rgba(20, 27, 21, 0.90) 46%,
     rgba(20, 27, 21, 0.52) 76%,
@@ -2204,4 +2213,190 @@ body.world-on .screen-slot {
 
 @media (prefers-reduced-motion: reduce) {
   .radio-eq.is-live i { animation: none; height: 7px; }
+}
+
+/* ================================================================
+   Practice pages (/ai, /healthcare)
+   Two separate practices on one shared page shape. Tokens only; no new
+   colors. Every block collapses to a single column at 640px.
+   ================================================================ */
+.practice-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 28px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--rule);
+}
+.practice-stats div { margin: 0; }
+.practice-stats dt {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.practice-stats dd {
+  margin: 6px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.practice-fit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.practice-fit ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.practice-fit li {
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+.practice-fit-label {
+  margin: 0 0 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.practice-fit-label--no { color: var(--text-faint); }
+.practice-fit-label--no + ul li { border-left-color: var(--rule); }
+
+.practice-segments {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+.practice-segments li {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 18px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.practice-segment-who {
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--text);
+}
+.practice-segment-need { color: var(--text-soft); line-height: 1.6; }
+
+.practice-rules {
+  display: grid;
+  gap: 14px;
+}
+.practice-rule {
+  padding: 18px 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+.practice-rule h3 { margin: 0 0 4px; font-size: 19px; }
+.practice-rule h3 a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.practice-rule h3 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.practice-rule-scope {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+.practice-rule ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.practice-rule li {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 14px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+.practice-rule-when {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  padding-top: 2px;
+}
+
+.practice-note {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.practice-resources {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.practice-resources li {
+  display: grid;
+  grid-template-columns: 124px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+.practice-resource-kind {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+.practice-bridge {
+  margin: 26px 0 0;
+  padding: 16px 18px;
+  border: 1px dashed var(--rule);
+  border-radius: 12px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+.practice-bridge a { white-space: nowrap; }
+
+.practice-ladder {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.practice-ladder li {
+  position: relative;
+  padding: 18px 18px 20px;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+}
+.practice-ladder-step {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.practice-ladder h3 { margin: 8px 0 2px; font-size: 20px; }
+.practice-ladder-shape {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-faint);
+}
+.practice-ladder p:last-child { margin: 0; color: var(--text-soft); font-size: 15px; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .practice-stats,
+  .practice-fit,
+  .practice-ladder { grid-template-columns: 1fr; }
+  .practice-segments li,
+  .practice-resources li,
+  .practice-rule li { grid-template-columns: 1fr; gap: 4px; }
+  .practice-bridge a { white-space: normal; }
 }

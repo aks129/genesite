@@ -7,7 +7,7 @@ import { talks } from "./speaking";
 import { career, cityCoords } from "./career";
 import { expertise, tenureYears } from "./expertise";
 import { events } from "./events";
-import { services } from "./services";
+import { practices } from "./practices";
 import { stations, embedUrl, watchUrl } from "./radio";
 
 describe("data integrity", () => {
@@ -140,24 +140,43 @@ describe("data integrity", () => {
     }
   });
 
-  it("services have name, category, tagline, description; outcomes are non-empty when present", () => {
-    expect(services.length).toBeGreaterThanOrEqual(6);
-    const cats = new Set([
-      "Strategy & Governance",
-      "Implementation",
-      "Data & Analytics",
-      "Enablement",
-    ]);
-    for (const s of services) {
-      expect(s.name).toBeTruthy();
-      expect(cats.has(s.category)).toBe(true);
-      expect(s.tagline).toBeTruthy();
-      expect(s.description.length).toBeGreaterThan(40);
-      for (const o of s.outcomes ?? []) expect(o).toBeTruthy();
-      if (s.proof !== undefined) expect(s.proof.length).toBeGreaterThan(40);
+  it("keeps AI and healthcare as two separate, complete practices", () => {
+    expect(practices.map(p => p.slug).sort()).toEqual(["ai", "healthcare"]);
+    for (const p of practices) {
+      for (const f of [p.name, p.dateline, p.headline, p.lede, p.door]) expect(f).toBeTruthy();
+      expect(p.offerings.length, p.slug).toBeGreaterThanOrEqual(4);
+      expect(p.forWho.length, p.slug).toBeGreaterThanOrEqual(2);
+      expect(p.notFor.length, p.slug).toBeGreaterThanOrEqual(2);
+      expect(p.ladder, p.slug).toHaveLength(3);
+      expect(p.stats.length, p.slug).toBeGreaterThanOrEqual(2);
+      // Each practice points at the other one, and only there.
+      expect(p.bridge.to).not.toBe(p.slug);
+      expect(practices.some(o => o.slug === p.bridge.to)).toBe(true);
+      for (const o of p.offerings) {
+        expect(o.name && o.plain && o.description, o.name).toBeTruthy();
+        expect(o.deliverables.length, o.name).toBeGreaterThanOrEqual(2);
+        if (o.proof !== undefined) expect(o.proof.length, o.name).toBeGreaterThan(40);
+      }
+      for (const r of p.resources) expect(r.href, r.label).toMatch(/^https?:\/\//);
+      for (const rule of p.regulatory?.rules ?? []) {
+        expect(rule.href).toMatch(/^https:\/\//);
+        expect(rule.milestones.length).toBeGreaterThanOrEqual(1);
+      }
     }
-    const withProof = services.filter(s => s.proof);
-    expect(withProof.length).toBeGreaterThanOrEqual(4);
+  });
+
+  it("writes practice copy without em dashes", () => {
+    // Gene's style rule. Everything a visitor reads on the practice pages.
+    const text = JSON.stringify(practices);
+    expect(text).not.toContain("\u2014");
+  });
+
+  it("covers all eight AI areas Gene named", () => {
+    const ai = practices.find(p => p.slug === "ai")!;
+    const text = JSON.stringify(ai.offerings).toLowerCase();
+    for (const term of ["agents", "workflows", "brain", "contextual reasoning", "enterprise", "governance", "training", "built"]) {
+      expect(text, term).toContain(term);
+    }
   });
 
   it("socials have label and absolute href (or mailto)", () => {

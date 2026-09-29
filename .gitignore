@@ -38,3 +38,4 @@ scroll-world-preview.mp4
 
 # playwright-mcp scratch output
 .playwright-mcp/
+.env*

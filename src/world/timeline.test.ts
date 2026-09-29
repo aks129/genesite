@@ -61,7 +61,7 @@ describe("waypoints", () => {
 
   it("covers every navigable route, aliases included", () => {
     // Mirrors the nav in Nav.tsx plus the /services alias of /expertise.
-    for (const route of ["/career", "/expertise", "/services", "/projects", "/writing", "/speaking", "/hobbies"]) {
+    for (const route of ["/career", "/ai", "/healthcare", "/expertise", "/services", "/projects", "/writing", "/speaking", "/hobbies"]) {
       expect(WAYPOINTS[route], route).toBeDefined();
       expect(isFilmRoute(route)).toBe(false);
     }

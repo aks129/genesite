@@ -18,6 +18,8 @@ const LABELS: Record<string, string> = {
   "/": "~/home",
   "/career": "~/career",
   "/expertise": "~/expertise",
+  "/ai": "~/ai",
+  "/healthcare": "~/healthcare",
   "/services": "~/expertise",
   "/projects": "~/projects",
   "/writing": "~/writing",

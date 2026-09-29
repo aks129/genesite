@@ -21,17 +21,23 @@ npm test -- Reveal     # run a single test file by name fragment
 
 ## Routing & layout
 
-Six routes, all served by a single `BrowserRouter` in `src/App.tsx`. SPA — Vercel rewrites everything to `/` (`vercel.json` `rewrites`), client-side router handles the rest.
+Routes, all served by a single `BrowserRouter` in `src/App.tsx`. SPA: Vercel rewrites everything to `/` (`vercel.json` `rewrites`), client-side router handles the rest.
 
 ```text
-/            Home          Hero + About + Travels + Contact + Socials
+/            Home          Scroll film + two pillars + About + Socials
+/ai          PracticePage  The AI practice (agents, brain systems, governance, training)
+/healthcare  PracticePage  The healthcare practice (FHIR, CMS-0057-F, digital quality)
+/expertise   ServicesPage  Two doors, one to each practice. Keep it tiny.
+/services    ServicesPage  Alias of /expertise
 /projects    ProjectsPage  Technical project cards (HealthClaw, etc.)
 /career      CareerPage    USMap + timeline + expertise + events
 /hobbies     HobbiesPage   Personal passions + freeform list
 /writing     WritingPage   Newsletter + podcast entries
-/speaking    SpeakingPage  Talks list with "Upcoming" callout
+/speaking    SpeakingPage  Talks list, and the screen on the wall
 *            Home          fallback
 ```
+
+**The two practices are separate on purpose.** AI and healthcare each get their own page from `src/data/practices.ts`, rendered by one shared `PracticePage` so they read as equals. They meet in exactly one place (`bridge`). Proof lines appear only where the rest of the site already backs them; an offering without verified proof ships without one. No em dashes in practice copy (a test enforces it).
 
 `App.tsx` layout:
 

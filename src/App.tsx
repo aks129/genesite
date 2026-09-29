@@ -20,12 +20,15 @@ import HobbiesPage from "./pages/HobbiesPage";
 import WritingPage from "./pages/WritingPage";
 import SpeakingPage from "./pages/SpeakingPage";
 import ServicesPage from "./pages/ServicesPage";
+import PracticePage from "./pages/PracticePage";
 import { startLenis, stopLenis, jumpToTop } from "./lenis";
 
 const TITLES: Record<string, string> = {
   "/": "Gene Vestel — AI builder · healthcare technology",
   "/career": "Career — Gene Vestel",
   "/expertise": "Expertise — Gene Vestel",
+  "/ai": "AI practice — Gene Vestel",
+  "/healthcare": "Healthcare practice — Gene Vestel",
   "/services": "Expertise — Gene Vestel",
   "/projects": "Projects — Gene Vestel",
   "/writing": "Podcast + Writing — Gene Vestel",
@@ -80,6 +83,8 @@ export default function App() {
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/writing" element={<WritingPage />} />
           <Route path="/speaking" element={<SpeakingPage />} />
+          <Route path="/ai" element={<PracticePage key="ai" slug="ai" />} />
+          <Route path="/healthcare" element={<PracticePage key="healthcare" slug="healthcare" />} />
           <Route path="/expertise" element={<ServicesPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="*" element={<Home />} />
