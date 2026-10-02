@@ -8,6 +8,7 @@ import { career, cityCoords } from "./career";
 import { expertise, tenureYears } from "./expertise";
 import { events } from "./events";
 import { practices } from "./practices";
+import { bio } from "./bio";
 import { stations, embedUrl, watchUrl } from "./radio";
 
 describe("data integrity", () => {
@@ -176,6 +177,28 @@ describe("data integrity", () => {
     const text = JSON.stringify(ai.offerings).toLowerCase();
     for (const term of ["agents", "workflows", "brain", "contextual reasoning", "enterprise", "governance", "training", "built"]) {
       expect(text, term).toContain(term);
+    }
+  });
+
+  it("bio has a short and a full version, third person, no em dashes", () => {
+    const words = (t: string) => t.trim().split(/\s+/).length;
+    expect(words(bio.short)).toBeLessThanOrEqual(70);
+    expect(words(bio.long)).toBeGreaterThan(words(bio.short));
+    for (const t of [bio.short, bio.long]) {
+      expect(t.startsWith("Gene Vestel is")).toBe(true);
+      expect(t).not.toContain("\u2014");
+      expect(t).not.toMatch(/\bI\b|\bmy\b/);
+    }
+  });
+
+  it("healthcare market breadth names only employers on the career page", async () => {
+    const { career } = await import("./career");
+    const orgs = career.map(r => r.org).join(" | ");
+    const hc = practices.find(p => p.slug === "healthcare")!;
+    for (const m of hc.markets ?? []) {
+      for (const org of m.label.split(", ")) {
+        expect(orgs.includes(org), org).toBe(true);
+      }
     }
   });
 

@@ -24,7 +24,8 @@ export default function CareerPage() {
             Two decades on a fairly specific path: pharmacy, then payer,
             provider, digital health, and now AI. The common thread is getting
             clinical data to move between systems and mean something when it
-            arrives.
+            arrives. It started in pharmacy business analysis and has run from
+            analyst to manager to director to VP of AI.
           </p>
         </header>
       </Reveal>

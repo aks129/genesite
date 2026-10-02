@@ -33,6 +33,16 @@ export default function PracticePage({ slug }: { slug: PracticeSlug }) {
               </div>
             ))}
           </dl>
+          {p.markets && (
+            <ul className="practice-markets" aria-label="Markets worked in">
+              {p.markets.map(m => (
+                <li key={m.value}>
+                  <span className="practice-market">{m.value}</span>
+                  <span className="practice-market-where">{m.label}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </header>
       </Reveal>
 

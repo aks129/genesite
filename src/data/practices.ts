@@ -43,6 +43,8 @@ export type Practice = {
   /** One line for the door on /expertise. */
   door: string;
   stats: Stat[];
+  /** Market segments worked in, each with where. Verified against career.ts. */
+  markets?: Stat[];
   forWho: string[];
   notFor: string[];
   offerings: Offering[];
@@ -176,6 +178,14 @@ export const practices: Practice[] = [
       { value: "20+", label: "years in healthcare data" },
       { value: "5", label: "years leading HEDIS at UPMC Health Plan" },
       { value: "~$180M", label: "cumulative impact from quality analytics" },
+    ],
+    markets: [
+      { value: "Pharmacy benefits", label: "Medco, Express Scripts" },
+      { value: "Medicare Part D", label: "Express Scripts" },
+      { value: "Health plans", label: "UPMC Health Plan" },
+      { value: "Providers", label: "Allegheny Health Network" },
+      { value: "Consumer health", label: "b.well Connected Health" },
+      { value: "Quality measurement", label: "NCQA" },
     ],
     forWho: [
       "Payers building the CMS-0057-F APIs or moving HEDIS to digital.",

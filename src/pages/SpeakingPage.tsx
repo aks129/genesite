@@ -2,6 +2,7 @@ import Reveal from "../components/Reveal";
 import { talks } from "../data/speaking";
 import Waypoint from "../components/Waypoint";
 import ScreenPlayer from "../components/ScreenPlayer";
+import BioBlock from "../components/BioBlock";
 
 export default function SpeakingPage() {
   const upcoming = talks.filter(t => t.upcoming);
@@ -74,6 +75,8 @@ export default function SpeakingPage() {
           </ul>
         </section>
       </Reveal>
+
+      <BioBlock />
 
       <Reveal>
         <section aria-labelledby="invite-h">
