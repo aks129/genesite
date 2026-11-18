@@ -36,7 +36,7 @@ export default function Hero() {
           </a>
           <a
             className="hero-cta magnetic"
-            href="https://evestel.substack.com/subscribe"
+            href="https://newsletter.eugenevestel.com/embed"
             target="_blank"
             rel="noopener noreferrer"
             data-hud
