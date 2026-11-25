@@ -18,7 +18,7 @@ export const writings: Writing[] = [
     description:
       "Weekly issues on FHIR implementation, healthcare AI, and what agents change about the stack. Written for engineers, product leads, and the standards community.",
     platforms: [
-      { label: "Subscribe on Substack", href: "https://evestel.substack.com/subscribe" },
+      { label: "Subscribe on Substack", href: "https://newsletter.eugenevestel.com/embed" },
       { label: "Read the archive", href: "https://evestel.substack.com/archive" },
     ],
   },
